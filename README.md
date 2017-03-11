@@ -1,0 +1,1 @@
+# Cake.Prca.CodeAnalysisProvider.MsBuild
