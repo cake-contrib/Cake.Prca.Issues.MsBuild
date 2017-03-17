@@ -14,7 +14,9 @@
                 var result = Record.Exception(() => 
                     new MsBuildCodeAnalysisProvider(
                         null, 
-                        new MsBuildCodeAnalysisSettings(@"c:\src\msbuild.log", new XmlFileLoggerFormat(new FakeLog()),  @"c:\src")));
+                        MsBuildCodeAnalysisSettings.FromContent(
+                            "Foo", 
+                            new XmlFileLoggerFormat(new FakeLog()),  @"c:\src")));
 
                 // Then
                 result.IsArgumentNullException("log");

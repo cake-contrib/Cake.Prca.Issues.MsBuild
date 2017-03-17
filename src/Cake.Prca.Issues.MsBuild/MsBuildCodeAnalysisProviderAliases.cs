@@ -25,7 +25,7 @@
         ///         Context.Tools.Resolve("MSBuild.ExtensionPack.Loggers.dll").FullPath,
         ///         "XmlFileLogger",
         ///         string.Format(
-        ///             "logfile=\"{0}\";invalidCharReplacement=_;verbosity=Detailed;encoding=UTF-8",
+        ///             "logfile=\"{0}\";verbosity=Detailed;encoding=UTF-8",
         ///             @"C:\build\msbuild.log")
         ///     )
         /// </code>
@@ -64,8 +64,8 @@
         /// <code>
         /// <![CDATA[
         ///     ReportCodeAnalysisIssuesToPullRequest(
-        ///         MsBuildCodeAnalysis(
-        ///             new FilePath("C:\build\msbuild.log"),
+        ///         MsBuildCodeAnalysisFromFilePath(
+        ///             "C:\build\msbuild.log",
         ///             MsBuildXmlFileLoggerFormat,
         ///             new DirectoryPath("c:\repo")),
         ///         TfsPullRequests(
@@ -76,7 +76,7 @@
         /// </example>
         [CakeMethodAlias]
         [CakeAliasCategory(CakeAliasConstants.CodeAnalysisProviderCakeAliasCategory)]
-        public static ICodeAnalysisProvider MsBuildCodeAnalysis(
+        public static ICodeAnalysisProvider MsBuildCodeAnalysisFromFilePath(
             this ICakeContext context,
             FilePath logFilePath,
             ILogFileFormat format,
@@ -87,7 +87,7 @@
             format.NotNull(nameof(format));
             repositoryRoot.NotNull(nameof(repositoryRoot));
 
-            return context.MsBuildCodeAnalysis(new MsBuildCodeAnalysisSettings(logFilePath, format, repositoryRoot));
+            return context.MsBuildCodeAnalysis(MsBuildCodeAnalysisSettings.FromFilePath(logFilePath, format, repositoryRoot));
         }
 
         /// <summary>
@@ -104,7 +104,7 @@
         /// <code>
         /// <![CDATA[
         ///     ReportCodeAnalysisIssuesToPullRequest(
-        ///         MsBuildCodeAnalysis(
+        ///         MsBuildCodeAnalysisFromContent(
         ///             logFileContent,
         ///             MsBuildXmlFileLoggerFormat,
         ///             new DirectoryPath("c:\repo")),
@@ -116,7 +116,7 @@
         /// </example>
         [CakeMethodAlias]
         [CakeAliasCategory(CakeAliasConstants.CodeAnalysisProviderCakeAliasCategory)]
-        public static ICodeAnalysisProvider MsBuildCodeAnalysis(
+        public static ICodeAnalysisProvider MsBuildCodeAnalysisFromContent(
             this ICakeContext context,
             string logFileContent,
             ILogFileFormat format,
@@ -127,7 +127,7 @@
             format.NotNull(nameof(format));
             repositoryRoot.NotNull(nameof(repositoryRoot));
 
-            return context.MsBuildCodeAnalysis(new MsBuildCodeAnalysisSettings(logFileContent, format, repositoryRoot));
+            return context.MsBuildCodeAnalysis(MsBuildCodeAnalysisSettings.FromContent(logFileContent, format, repositoryRoot));
         }
 
         /// <summary>
@@ -141,8 +141,8 @@
         /// <code>
         /// <![CDATA[
         ///     var settings =
-        ///         new MsBuildCodeAnalysisSettings(
-        ///             new FilePath("C:\build\msbuild.log"),
+        ///         MsBuildCodeAnalysisSettings.FromFilePath(
+        ///             "C:\build\msbuild.log",
         ///             MsBuildXmlFileLoggerFormat,
         ///             new DirectoryPath("c:\repo"));
         ///

@@ -160,6 +160,12 @@
             // Make path relative to repository root.
             fileName = fileName.Substring(settings.RepositoryRoot.FullPath.Length);
 
+            // Remove leading directory separator.
+            if (fileName.StartsWith(Path.DirectorySeparatorChar.ToString()))
+            {
+                fileName = fileName.Substring(1);
+            }
+
             return true;
         }
     }

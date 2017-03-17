@@ -18,7 +18,7 @@
                 using (var sr = new StreamReader(stream))
                 {
                     this.Settings = 
-                        new MsBuildCodeAnalysisSettings(
+                        MsBuildCodeAnalysisSettings.FromContent(
                             sr.ReadToEnd(),
                             new XmlFileLoggerFormat(this.Log),
                             new Core.IO.DirectoryPath(@"c:\Source\Cake.Prca"));

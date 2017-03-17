@@ -15,8 +15,8 @@
             {
                 // Given / When
                 var result = Record.Exception(() => 
-                    new MsBuildCodeAnalysisSettings(
-                        (FilePath)null,
+                    MsBuildCodeAnalysisSettings.FromFilePath(
+                        null,
                         new XmlFileLoggerFormat(new FakeLog()),
                         new DirectoryPath(@"C:\")));
 
@@ -29,10 +29,10 @@
             {
                 // Given / When
                 var result = Record.Exception(() =>
-                    new MsBuildCodeAnalysisSettings(
-                            new FilePath(@"C:\foo.log"),
-                            null,
-                            new DirectoryPath(@"C:\")));
+                    MsBuildCodeAnalysisSettings.FromFilePath(
+                        @"C:\foo.log",
+                        null,
+                        new DirectoryPath(@"C:\")));
 
                 // Then
                 result.IsArgumentNullException("format");
@@ -43,10 +43,10 @@
             {
                 // Given / When
                 var result = Record.Exception(() =>
-                    new MsBuildCodeAnalysisSettings(
-                            new FilePath(@"C:\foo.log"),
-                            new XmlFileLoggerFormat(new FakeLog()),
-                            null));
+                    MsBuildCodeAnalysisSettings.FromFilePath(
+                        @"C:\foo.log",
+                        new XmlFileLoggerFormat(new FakeLog()),
+                        null));
 
                 // Then
                 result.IsArgumentNullException("repositoryRoot");
@@ -57,8 +57,8 @@
             {
                 // Given / When
                 var result = Record.Exception(() =>
-                    new MsBuildCodeAnalysisSettings(
-                        (string)null,
+                    MsBuildCodeAnalysisSettings.FromContent(
+                        null,
                         new XmlFileLoggerFormat(new FakeLog()),
                         new DirectoryPath(@"C:\")));
 
@@ -71,7 +71,7 @@
             {
                 // Given / When
                 var result = Record.Exception(() =>
-                    new MsBuildCodeAnalysisSettings(
+                    MsBuildCodeAnalysisSettings.FromContent(
                         string.Empty,
                         new XmlFileLoggerFormat(new FakeLog()),
                         new DirectoryPath(@"C:\")));
@@ -85,7 +85,7 @@
             {
                 // Given / When
                 var result = Record.Exception(() =>
-                    new MsBuildCodeAnalysisSettings(
+                    MsBuildCodeAnalysisSettings.FromContent(
                         " ",
                         new XmlFileLoggerFormat(new FakeLog()),
                         new DirectoryPath(@"C:\")));
@@ -99,7 +99,7 @@
             {
                 // Given / When
                 var result = Record.Exception(() => 
-                    new MsBuildCodeAnalysisSettings(
+                    MsBuildCodeAnalysisSettings.FromContent(
                         "foo",
                         null,
                         new DirectoryPath(@"C:\")));
@@ -113,7 +113,7 @@
             {
                 // Given / When
                 var result = Record.Exception(() =>
-                    new MsBuildCodeAnalysisSettings(
+                    MsBuildCodeAnalysisSettings.FromContent(
                         "foo",
                         new XmlFileLoggerFormat(new FakeLog()),
                         null));
@@ -131,7 +131,7 @@
                 var repoRoot = new DirectoryPath(@"C:\");
 
                 // When
-                var settings = new MsBuildCodeAnalysisSettings(logFileContent, format, repoRoot);
+                var settings = MsBuildCodeAnalysisSettings.FromContent(logFileContent, format, repoRoot);
 
                 // Then
                 settings.LogFileContent.ShouldBe(logFileContent);
@@ -162,8 +162,8 @@
 
                     // When
                     var settings = 
-                        new MsBuildCodeAnalysisSettings(
-                            new FilePath(fileName),
+                        MsBuildCodeAnalysisSettings.FromFilePath(
+                            fileName,
                             new XmlFileLoggerFormat(new FakeLog()),
                             new DirectoryPath(@"C:\"));
 

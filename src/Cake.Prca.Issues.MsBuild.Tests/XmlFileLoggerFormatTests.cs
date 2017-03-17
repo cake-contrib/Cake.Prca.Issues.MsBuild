@@ -26,16 +26,18 @@
                 var fixture = new MsBuildCodeAnalysisProviderFixture("IssueWithFile.xml");
 
                 // When
-                var issues = fixture.ReadIssues();
+                var issues = fixture.ReadIssues().ToList();
 
                 // Then
-                issues.Count().ShouldBe(1);
+                issues.Count.ShouldBe(1);
                 var issue = issues.Single();
-                issue.AffectedFileRelativePath.ToString().ShouldBe(new FilePath(@"\src\Cake.Prca.CodeAnalysisProvider.MsBuild.Tests\MsBuildCodeAnalysisProviderTests.cs").ToString()) ;
-                issue.Line.ShouldBe(1311);
-                issue.Rule.ShouldBe("CA2201");
-                issue.Priority.ShouldBe(0);
-                issue.Message.ShouldBe(@"Microsoft.Usage : 'ConfigurationManager.GetSortedConfigFiles(String)' creates an exception of type 'ApplicationException', an exception type that is not sufficiently specific and should never be raised by user code. If this exception instance might be thrown, use a different exception type.");
+                this.CheckIssue(
+                    issue,
+                    @"src\Cake.Prca.CodeAnalysisProvider.MsBuild.Tests\MsBuildCodeAnalysisProviderTests.cs",
+                    1311,
+                    "CA2201",
+                    0,
+                    @"Microsoft.Usage : 'ConfigurationManager.GetSortedConfigFiles(String)' creates an exception of type 'ApplicationException', an exception type that is not sufficiently specific and should never be raised by user code. If this exception instance might be thrown, use a different exception type.");
             }
 
             [Fact]
@@ -45,16 +47,18 @@
                 var fixture = new MsBuildCodeAnalysisProviderFixture("IssueWithOnlyFileName.xml");
 
                 // When
-                var issues = fixture.ReadIssues();
+                var issues = fixture.ReadIssues().ToList();
 
                 // Then
-                issues.Count().ShouldBe(1);
+                issues.Count.ShouldBe(1);
                 var issue = issues.Single();
-                issue.AffectedFileRelativePath.ToString().ShouldBe(new FilePath(@"\src\Cake.Prca.CodeAnalysisProvider.MsBuild.Tests\MsBuildCodeAnalysisProviderTests.cs").ToString());
-                issue.Line.ShouldBe(13);
-                issue.Rule.ShouldBe("CS0219");
-                issue.Priority.ShouldBe(0);
-                issue.Message.ShouldBe(@"The variable 'foo' is assigned but its value is never used");
+                this.CheckIssue(
+                    issue,
+                    @"src\Cake.Prca.CodeAnalysisProvider.MsBuild.Tests\MsBuildCodeAnalysisProviderTests.cs",
+                    13,
+                    "CS0219",
+                    0,
+                    "The variable 'foo' is assigned but its value is never used");
             }
 
             [Fact]
@@ -64,11 +68,27 @@
                 var fixture = new MsBuildCodeAnalysisProviderFixture("IssueWithoutFile.xml");
 
                 // When
-                var issues = fixture.ReadIssues();
+                var issues = fixture.ReadIssues().ToList();
 
                 // Then
-                // TODO Is this correct? Or should we return them here and have the core logic or pull request system implementation taking care how to handle them?
-                issues.Count().ShouldBe(0);
+                // TODO Should be returned as soon as https://github.com/cake-contrib/Cake.Prca/issues/6 is implemented
+                issues.Count.ShouldBe(0);
+            }
+
+            private void CheckIssue(
+                ICodeAnalysisIssue issue,
+                string affectedFileRelativePath,
+                int? line,
+                string rule,
+                int priority,
+                string message)
+            {
+                issue.AffectedFileRelativePath.ToString().ShouldBe(new FilePath(affectedFileRelativePath).ToString());
+                issue.AffectedFileRelativePath.IsRelative.ShouldBe(true, "Issue path is not relative");
+                issue.Line.ShouldBe(line);
+                issue.Rule.ShouldBe(rule);
+                issue.Priority.ShouldBe(priority);
+                issue.Message.ShouldBe(message);
             }
         }
     }
