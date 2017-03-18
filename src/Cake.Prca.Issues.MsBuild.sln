@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.Prca.Issues.MsBuild", "Cake.Prca.Issues.MsBuild\Cake.Prca.Issues.MsBuild.csproj", "{85CDFEB5-4E7B-4FB3-8B1B-9257482C37B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.Prca.Issues.MsBuild.Tests", "Cake.Prca.Issues.MsBuild.Tests\Cake.Prca.Issues.MsBuild.Tests.csproj", "{4837E32B-59B3-4791-867F-CD8B23CA3FEA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{5E684B86-6DD7-400B-BD0B-668CE50CE2B6}"
+	ProjectSection(SolutionItems) = preProject
+		..\build.ps1 = ..\build.ps1
+		..\build.sh = ..\build.sh
+		..\setup.cake = ..\setup.cake
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuspec", "nuspec", "{4C9224E7-E8D9-42AB-B045-A0FA9C2323B7}"
+	ProjectSection(SolutionItems) = preProject
+		..\nuspec\nuget\Cake.Prca.Issues.MsBuild.nuspec = ..\nuspec\nuget\Cake.Prca.Issues.MsBuild.nuspec
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{85CDFEB5-4E7B-4FB3-8B1B-9257482C37B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85CDFEB5-4E7B-4FB3-8B1B-9257482C37B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85CDFEB5-4E7B-4FB3-8B1B-9257482C37B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85CDFEB5-4E7B-4FB3-8B1B-9257482C37B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4837E32B-59B3-4791-867F-CD8B23CA3FEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4837E32B-59B3-4791-867F-CD8B23CA3FEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4837E32B-59B3-4791-867F-CD8B23CA3FEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4837E32B-59B3-4791-867F-CD8B23CA3FEA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4C9224E7-E8D9-42AB-B045-A0FA9C2323B7} = {5E684B86-6DD7-400B-BD0B-668CE50CE2B6}
+	EndGlobalSection
+EndGlobal

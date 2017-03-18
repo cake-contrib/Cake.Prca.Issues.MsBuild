@@ -4,28 +4,28 @@ This Addin for the Cake Build Automation System allows you to write issue logged
 using the [Cake Pull Request Code Analysis Addin].
 More about Cake at http://cakebuild.net
 
-[![License](http://img.shields.io/:license-mit-blue.svg)](https://github.com/cake-contrib/Cake.Prca.IssueProvider.MsBuild/blob/feature/build/LICENSE)
+[![License](http://img.shields.io/:license-mit-blue.svg)](https://github.com/cake-contrib/Cake.Prca.Issues.MsBuild/blob/feature/build/LICENSE)
 
 ## Information
 
-||Stable|Pre-release|
+| | Stable | Pre-release |
 |:--:|:--:|:--:|
-|GitHub Release|-|[![GitHub release](https://img.shields.io/github/release/cake-contrib/Cake.Prca.IssueProvider.MsBuild.svg)](https://github.com/cake-contrib/Cake.Prca.IssueProvider.MsBuild/releases/latest)|
-|NuGet|[![NuGet](https://img.shields.io/nuget/v/Cake.Prca.IssueProvider.MsBuild.svg)](https://www.nuget.org/packages/Cake.Prca.IssueProvider.MsBuild)|[![NuGet](https://img.shields.io/nuget/vpre/Cake.Prca.IssueProvider.MsBuild.svg)](https://www.nuget.org/packages/Cake.Prca.IssueProvider.MsBuild)|
+|GitHub Release|-|[![GitHub release](https://img.shields.io/github/release/cake-contrib/Cake.Prca.Issues.MsBuild.svg)](https://github.com/cake-contrib/Cake.Prca.Issues.MsBuild/releases/latest)|
+|NuGet|[![NuGet](https://img.shields.io/nuget/v/Cake.Prca.Issues.MsBuild.svg)](https://www.nuget.org/packages/Cake.Prca.Issues.MsBuild)|[![NuGet](https://img.shields.io/nuget/vpre/Cake.Prca.Issues.MsBuild.svg)](https://www.nuget.org/packages/Cake.Prca.Issues.MsBuild)|
 
 ## Build Status
 
 |Develop|Master|
 |:--:|:--:|
-|[![Build status](https://ci.appveyor.com/api/projects/status/xxx/branch/develop?svg=true)](https://ci.appveyor.com/project/cakecontrib/cake-prca-issueprovider-msbuild/branch/develop)|[![Build status](https://ci.appveyor.com/api/projects/status/xxx/branch/develop?svg=true)](https://ci.appveyor.com/project/cakecontrib/cake-prca-issueprovider-msbuild/branch/master)|
+|[![Build status](https://ci.appveyor.com/api/projects/status/xxx/branch/develop?svg=true)](https://ci.appveyor.com/project/cakecontrib/cake-prca-issues-msbuild/branch/develop)|[![Build status](https://ci.appveyor.com/api/projects/status/xxx/branch/develop?svg=true)](https://ci.appveyor.com/project/cakecontrib/cake-prca-issues-msbuild/branch/master)|
 
 ## Code Coverage
 
-[![Coverage Status](https://coveralls.io/repos/github/cake-contrib/Cake.Prca.IssueProvider.MsBuild/badge.svg?branch=develop)](https://coveralls.io/github/cake-contrib/Cake.Prca.IssueProvider.MsBuild?branch=develop)
+[![Coverage Status](https://coveralls.io/repos/github/cake-contrib/Cake.Prca.Issues.MsBuild/badge.svg?branch=develop)](https://coveralls.io/github/cake-contrib/Cake.Prca.Issues.MsBuild?branch=develop)
 
 ## Quick Links
 
-- [Documentation](https://cake-contrib.github.io/Cake.Prca.IssueProvider.MsBuild)
+- [Documentation](https://cake-contrib.github.io/Cake.Prca.Issues.MsBuild)
 
 ## Chat Room
 
