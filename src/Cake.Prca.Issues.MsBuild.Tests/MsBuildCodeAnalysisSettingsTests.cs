@@ -1,6 +1,9 @@
 ﻿namespace Cake.Prca.Issues.MsBuild.Tests
 {
+    using System;
     using System.IO;
+    using System.Linq;
+    using System.Text;
     using Core.IO;
     using Shouldly;
     using Testing;
@@ -126,7 +129,7 @@
             public void Should_Set_Property_Values_Passed_To_Constructor()
             {
                 // Given 
-                var logFileContent = "foo";
+                const string logFileContent = "foo";
                 var format = new XmlFileLoggerFormat(new FakeLog());
                 var repoRoot = new DirectoryPath(@"C:\");
 
@@ -146,19 +149,20 @@
                 try
                 {
                     // Given
+                    string expected;
+                    using (var ms = new MemoryStream())
                     using (var stream = this.GetType().Assembly.GetManifestResourceStream("Cake.Prca.Issues.MsBuild.Tests.Testfiles.IssueWithFile.xml"))
                     {
+                        stream.CopyTo(ms);
+                        var data = ms.ToArray();
+
                         using (var file = new FileStream(fileName, FileMode.Create, FileAccess.Write))
                         {
-                            stream.CopyTo(file);
+                            file.Write(data, 0, data.Length);
                         }
-                    }
 
-                    var expected =
-                        "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n" +
-                        "<build started=\"3/7/2017 8:31:20 AM\">\r\n" +
-                        "  <warning code=\"CA2201\" file=\"c:\\Source\\Cake.Prca\\src\\Cake.Prca.CodeAnalysisProvider.MsBuild.Tests\\MsBuildCodeAnalysisProviderTests.cs\" line=\"1311\" column=\"0\"><![CDATA[Microsoft.Usage : 'ConfigurationManager.GetSortedConfigFiles(String)' creates an exception of type 'ApplicationException', an exception type that is not sufficiently specific and should never be raised by user code. If this exception instance might be thrown, use a different exception type.]]></warning>\r\n" +
-                        "</build>";
+                        expected = ConvertFromUtf8(data);
+                    }
 
                     // When
                     var settings = 
@@ -177,6 +181,14 @@
                         File.Delete(fileName);
                     }
                 }
+            }
+            private static string ConvertFromUtf8(byte[] bytes)
+            {
+                var enc = new UTF8Encoding(true);
+                var preamble = enc.GetPreamble();
+                if (preamble.Where((p, i) => p != bytes[i]).Any())
+                    throw new ArgumentException("Not utf8-BOM");
+                return enc.GetString(bytes.Skip(preamble.Length).ToArray());
             }
         }
     }
