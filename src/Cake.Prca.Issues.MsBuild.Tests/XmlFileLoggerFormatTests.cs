@@ -31,7 +31,7 @@
                 // Then
                 issues.Count.ShouldBe(1);
                 var issue = issues.Single();
-                this.CheckIssue(
+                CheckIssue(
                     issue,
                     @"src\Cake.Prca.CodeAnalysisProvider.MsBuild.Tests\MsBuildCodeAnalysisProviderTests.cs",
                     1311,
@@ -52,7 +52,7 @@
                 // Then
                 issues.Count.ShouldBe(1);
                 var issue = issues.Single();
-                this.CheckIssue(
+                CheckIssue(
                     issue,
                     @"src\Cake.Prca.CodeAnalysisProvider.MsBuild.Tests\MsBuildCodeAnalysisProviderTests.cs",
                     13,
@@ -75,7 +75,7 @@
                 issues.Count.ShouldBe(0);
             }
 
-            private void CheckIssue(
+            private static void CheckIssue(
                 ICodeAnalysisIssue issue,
                 string affectedFileRelativePath,
                 int? line,
