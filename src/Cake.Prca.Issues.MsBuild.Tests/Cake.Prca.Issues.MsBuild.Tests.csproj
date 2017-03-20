@@ -23,7 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>..\..\..\Cake.Prca\src\Cake.Prca.Tests.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\Cake.Prca.Issues.MsBuild.Tests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -32,7 +32,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>..\Cake.Prca.Issues.MsBuild.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\Cake.Prca.Issues.MsBuild.Tests.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Cake.Core, Version=0.18.0.0, Culture=neutral, processorArchitecture=MSIL">
