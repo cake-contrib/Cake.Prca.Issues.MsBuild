@@ -14,13 +14,13 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <copyright>Copyright © 2017 BBT Software AG, Root/Zermatt, Switzerland</copyright>
     <tags>Cake Script PullRequest CodeAnalysis Cake-Prca-IssueProvider Linting MsBuild</tags>
+    <dependencies>
+      <dependency id="Cake.Prca" version="[0.1,0.2)" />
+    </dependencies>
   </metadata>
   <files>
     <file src="Cake.Prca.Issues.MsBuild.dll" target="lib\net45" />
     <file src="Cake.Prca.Issues.MsBuild.pdb" target="lib\net45" />
     <file src="Cake.Prca.Issues.MsBuild.xml" target="lib\net45" />
   </files>
-  <dependencies>
-    <dependency id="Cake.Prca" version="[0.1,0.2)" />
-  </dependencies>  
 </package>
