@@ -20,4 +20,7 @@
     <file src="Cake.Prca.Issues.MsBuild.pdb" target="lib\net45" />
     <file src="Cake.Prca.Issues.MsBuild.xml" target="lib\net45" />
   </files>
+  <dependencies>
+    <dependency id="Cake.Prca" version="[0.1,0.2)" />
+  </dependencies>  
 </package>
