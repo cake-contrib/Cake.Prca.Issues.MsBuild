@@ -7,17 +7,16 @@
 
     public class MsBuildCodeAnalysisProviderFixture
     {
-
         public MsBuildCodeAnalysisProviderFixture(string fileResourceName)
         {
             this.Log = new FakeLog();
-            Log.Verbosity = Verbosity.Normal;
+            this.Log.Verbosity = Verbosity.Normal;
 
             using (var stream = this.GetType().Assembly.GetManifestResourceStream("Cake.Prca.Issues.MsBuild.Tests.Testfiles." + fileResourceName))
             {
                 using (var sr = new StreamReader(stream))
                 {
-                    this.Settings = 
+                    this.Settings =
                         MsBuildCodeAnalysisSettings.FromContent(
                             sr.ReadToEnd(),
                             new XmlFileLoggerFormat(this.Log),
