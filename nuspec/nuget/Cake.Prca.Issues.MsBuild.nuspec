@@ -15,7 +15,7 @@
     <copyright>Copyright © 2017 BBT Software AG, Root/Zermatt, Switzerland</copyright>
     <tags>Cake Script PullRequest CodeAnalysis Cake-Prca-IssueProvider Linting MsBuild</tags>
     <dependencies>
-      <dependency id="Cake.Prca" version="[0.1,0.2)" />
+      <dependency id="Cake.Prca" version="[0.2,0.3)" />
     </dependencies>
   </metadata>
   <files>
