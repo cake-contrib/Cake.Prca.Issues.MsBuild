@@ -63,14 +63,17 @@
         /// <para>Report code analysis issues reported as MsBuild warnings to a TFS pull request:</para>
         /// <code>
         /// <![CDATA[
+        ///     var repoRoot = new DirectoryPath("c:\repo");
         ///     ReportCodeAnalysisIssuesToPullRequest(
         ///         MsBuildCodeAnalysisFromFilePath(
         ///             "C:\build\msbuild.log",
         ///             MsBuildXmlFileLoggerFormat,
-        ///             new DirectoryPath("c:\repo")),
+        ///             repoRoot),
         ///         TfsPullRequests(
         ///             new Uri("http://myserver:8080/tfs/defaultcollection/myproject/_git/myrepository"),
-        ///             "refs/heads/feature/myfeature"));
+        ///             "refs/heads/feature/myfeature",
+        ///             PrcaAuthenticationNtlm()),
+        ///         repoRoot);
         /// ]]>
         /// </code>
         /// </example>
@@ -103,14 +106,17 @@
         /// <para>Report code analysis issues reported as MsBuild warnings to a TFS pull request:</para>
         /// <code>
         /// <![CDATA[
+        ///     var repoRoot = new DirectoryPath("c:\repo");
         ///     ReportCodeAnalysisIssuesToPullRequest(
         ///         MsBuildCodeAnalysisFromContent(
         ///             logFileContent,
         ///             MsBuildXmlFileLoggerFormat,
-        ///             new DirectoryPath("c:\repo")),
+        ///             repoRoot),
         ///         TfsPullRequests(
         ///             new Uri("http://myserver:8080/tfs/defaultcollection/myproject/_git/myrepository"),
-        ///             "refs/heads/feature/myfeature"));
+        ///             "refs/heads/feature/myfeature",
+        ///             PrcaAuthenticationNtlm()),
+        ///         repoRoot);
         /// ]]>
         /// </code>
         /// </example>
@@ -140,17 +146,20 @@
         /// <para>Report code analysis issues reported as MsBuild warnings to a TFS pull request:</para>
         /// <code>
         /// <![CDATA[
+        ///     var repoRoot = new DirectoryPath("c:\repo");
         ///     var settings =
         ///         MsBuildCodeAnalysisSettings.FromFilePath(
         ///             "C:\build\msbuild.log",
         ///             MsBuildXmlFileLoggerFormat,
-        ///             new DirectoryPath("c:\repo"));
+        ///             repoRoot);
         ///
         ///     ReportCodeAnalysisIssuesToPullRequest(
         ///         MsBuildCodeAnalysis(settings),
         ///         TfsPullRequests(
         ///             new Uri("http://myserver:8080/tfs/defaultcollection/myproject/_git/myrepository"),
-        ///             "refs/heads/feature/myfeature"));
+        ///             "refs/heads/feature/myfeature",
+        ///             PrcaAuthenticationNtlm()),
+        ///         repoRoot);
         /// ]]>
         /// </code>
         /// </example>

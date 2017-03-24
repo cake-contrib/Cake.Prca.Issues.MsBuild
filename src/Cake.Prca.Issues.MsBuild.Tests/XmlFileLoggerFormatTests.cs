@@ -71,8 +71,15 @@
                 var issues = fixture.ReadIssues().ToList();
 
                 // Then
-                // TODO Should be returned as soon as https://github.com/cake-contrib/Cake.Prca/issues/6 is implemented
-                issues.Count.ShouldBe(0);
+                issues.Count.ShouldBe(1);
+                var issue = issues.Single();
+                CheckIssue(
+                    issue,
+                    null,
+                    null,
+                    "CA1711",
+                    0,
+                    "Microsoft.Naming : Rename type name 'UniqueQueue(Of T)' so that it does not end in 'Queue'.");
             }
 
             private static void CheckIssue(
@@ -83,8 +90,16 @@
                 int priority,
                 string message)
             {
-                issue.AffectedFileRelativePath.ToString().ShouldBe(new FilePath(affectedFileRelativePath).ToString());
-                issue.AffectedFileRelativePath.IsRelative.ShouldBe(true, "Issue path is not relative");
+                if (issue.AffectedFileRelativePath == null)
+                {
+                    affectedFileRelativePath.ShouldBeNull();
+                }
+                else
+                {
+                    issue.AffectedFileRelativePath.ToString().ShouldBe(new FilePath(affectedFileRelativePath).ToString());
+                    issue.AffectedFileRelativePath.IsRelative.ShouldBe(true, "Issue path is not relative");
+                }
+
                 issue.Line.ShouldBe(line);
                 issue.Rule.ShouldBe(rule);
                 issue.Priority.ShouldBe(priority);
