@@ -11,12 +11,13 @@
             public void Should_Throw_If_Log_Is_Null()
             {
                 // Given / When
-                var result = Record.Exception(() => 
+                var result = Record.Exception(() =>
                     new MsBuildCodeAnalysisProvider(
-                        null, 
+                        null,
                         MsBuildCodeAnalysisSettings.FromContent(
-                            "Foo", 
-                            new XmlFileLoggerFormat(new FakeLog()),  @"c:\src")));
+                            "Foo",
+                            new XmlFileLoggerFormat(new FakeLog()),
+                            @"c:\src")));
 
                 // Then
                 result.IsArgumentNullException("log");
@@ -27,7 +28,7 @@
             {
                 var result = Record.Exception(() =>
                     new MsBuildCodeAnalysisProvider(
-                        new FakeLog(), 
+                        new FakeLog(),
                         null));
 
                 // Then

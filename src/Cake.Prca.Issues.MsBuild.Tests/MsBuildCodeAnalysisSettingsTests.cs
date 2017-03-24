@@ -17,7 +17,7 @@
             public void Should_Throw_If_LogFilePath_Is_Null()
             {
                 // Given / When
-                var result = Record.Exception(() => 
+                var result = Record.Exception(() =>
                     MsBuildCodeAnalysisSettings.FromFilePath(
                         null,
                         new XmlFileLoggerFormat(new FakeLog()),
@@ -101,7 +101,7 @@
             public void Should_Throw_If_Format_For_LogFileContent_Is_Null()
             {
                 // Given / When
-                var result = Record.Exception(() => 
+                var result = Record.Exception(() =>
                     MsBuildCodeAnalysisSettings.FromContent(
                         "foo",
                         null,
@@ -128,7 +128,7 @@
             [Fact]
             public void Should_Set_Property_Values_Passed_To_Constructor()
             {
-                // Given 
+                // Given
                 const string logFileContent = "foo";
                 var format = new XmlFileLoggerFormat(new FakeLog());
                 var repoRoot = new DirectoryPath(@"C:\");
@@ -165,7 +165,7 @@
                     }
 
                     // When
-                    var settings = 
+                    var settings =
                         MsBuildCodeAnalysisSettings.FromFilePath(
                             fileName,
                             new XmlFileLoggerFormat(new FakeLog()),
@@ -182,12 +182,17 @@
                     }
                 }
             }
+
             private static string ConvertFromUtf8(byte[] bytes)
             {
                 var enc = new UTF8Encoding(true);
                 var preamble = enc.GetPreamble();
+
                 if (preamble.Where((p, i) => p != bytes[i]).Any())
+                {
                     throw new ArgumentException("Not utf8-BOM");
+                }
+
                 return enc.GetString(bytes.Skip(preamble.Length).ToArray());
             }
         }

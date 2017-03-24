@@ -40,7 +40,7 @@
                 }
 
                 // Read affected line from the warning.
-                int line;
+                int? line;
                 if (!TryGetLine(warning, out line))
                 {
                     continue;
@@ -70,9 +70,9 @@
         /// <param name="warning">Warning element from MsBuild log.</param>
         /// <param name="line">Returns line.</param>
         /// <returns>True if the line could be parsed.</returns>
-        private static bool TryGetLine(XElement warning, out int line)
+        private static bool TryGetLine(XElement warning, out int? line)
         {
-            line = -1;
+            line = null;
 
             var lineAttr = warning.Attribute("line");
 
@@ -83,6 +83,12 @@
             }
 
             line = int.Parse(lineValue, CultureInfo.InvariantCulture);
+
+            // Convert negative lines numbers to null
+            if (line < 0)
+            {
+                line = null;
+            }
 
             return true;
         }
@@ -126,13 +132,13 @@
             var fileAttr = warning.Attribute("file");
             if (fileAttr == null)
             {
-                return false;
+                return true;
             }
 
             fileName = fileAttr.Value;
             if (string.IsNullOrWhiteSpace(fileName))
             {
-                return false;
+                return true;
             }
 
             // If not absolute path, combine with file path from compile task.
