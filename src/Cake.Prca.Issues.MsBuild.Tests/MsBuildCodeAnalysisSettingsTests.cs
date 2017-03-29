@@ -10,7 +10,7 @@
 
     public class MsBuildCodeAnalysisSettingsTests
     {
-        public sealed class TheMsBuildCodeAnalysisSettings
+        public sealed class TheMsBuildCodeAnalysisSettingsCtor
         {
             [Fact]
             public void Should_Throw_If_LogFilePath_Is_Null()
