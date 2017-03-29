@@ -27,7 +27,12 @@
         /// <inheritdoc />
         public override IEnumerable<ICodeAnalysisIssue> ReadIssues(PrcaCommentFormat format)
         {
-            return this.settings.Format.ReadIssues(this.settings);
+            if (this.PrcaSettings == null)
+            {
+                throw new InvalidOperationException("Initialize needs to be called first.");
+            }
+
+            return this.settings.Format.ReadIssues(this.PrcaSettings, this.settings);
         }
     }
 }

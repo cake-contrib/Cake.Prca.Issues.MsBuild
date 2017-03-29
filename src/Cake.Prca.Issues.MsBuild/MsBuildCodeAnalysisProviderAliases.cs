@@ -57,7 +57,6 @@
         /// <param name="logFilePath">Path to the the MsBuild log file.
         /// The log file needs to be in the format as defined by the <paramref name="format"/> parameter.</param>
         /// <param name="format">Format of the provided MsBuild log file.</param>
-        /// <param name="repositoryRoot">Root path of the repository.</param>
         /// <returns>Instance of a provider for code analysis issues reported as MsBuild warnings.</returns>
         /// <example>
         /// <para>Report code analysis issues reported as MsBuild warnings to a TFS pull request:</para>
@@ -67,8 +66,7 @@
         ///     ReportCodeAnalysisIssuesToPullRequest(
         ///         MsBuildCodeAnalysisFromFilePath(
         ///             "C:\build\msbuild.log",
-        ///             MsBuildXmlFileLoggerFormat,
-        ///             repoRoot),
+        ///             MsBuildXmlFileLoggerFormat),
         ///         TfsPullRequests(
         ///             new Uri("http://myserver:8080/tfs/defaultcollection/myproject/_git/myrepository"),
         ///             "refs/heads/feature/myfeature",
@@ -82,15 +80,13 @@
         public static ICodeAnalysisProvider MsBuildCodeAnalysisFromFilePath(
             this ICakeContext context,
             FilePath logFilePath,
-            ILogFileFormat format,
-            DirectoryPath repositoryRoot)
+            ILogFileFormat format)
         {
             context.NotNull(nameof(context));
             logFilePath.NotNull(nameof(logFilePath));
             format.NotNull(nameof(format));
-            repositoryRoot.NotNull(nameof(repositoryRoot));
 
-            return context.MsBuildCodeAnalysis(MsBuildCodeAnalysisSettings.FromFilePath(logFilePath, format, repositoryRoot));
+            return context.MsBuildCodeAnalysis(MsBuildCodeAnalysisSettings.FromFilePath(logFilePath, format));
         }
 
         /// <summary>
@@ -100,7 +96,6 @@
         /// <param name="logFileContent">Content of the the MsBuild log file.
         /// The log file needs to be in the format as defined by the <paramref name="format"/> parameter.</param>
         /// <param name="format">Format of the provided MsBuild log file.</param>
-        /// <param name="repositoryRoot">Root path of the repository.</param>
         /// <returns>Instance of a provider for code analysis issues reported as MsBuild warnings.</returns>
         /// <example>
         /// <para>Report code analysis issues reported as MsBuild warnings to a TFS pull request:</para>
@@ -110,8 +105,7 @@
         ///     ReportCodeAnalysisIssuesToPullRequest(
         ///         MsBuildCodeAnalysisFromContent(
         ///             logFileContent,
-        ///             MsBuildXmlFileLoggerFormat,
-        ///             repoRoot),
+        ///             MsBuildXmlFileLoggerFormat),
         ///         TfsPullRequests(
         ///             new Uri("http://myserver:8080/tfs/defaultcollection/myproject/_git/myrepository"),
         ///             "refs/heads/feature/myfeature",
@@ -125,15 +119,13 @@
         public static ICodeAnalysisProvider MsBuildCodeAnalysisFromContent(
             this ICakeContext context,
             string logFileContent,
-            ILogFileFormat format,
-            DirectoryPath repositoryRoot)
+            ILogFileFormat format)
         {
             context.NotNull(nameof(context));
             logFileContent.NotNullOrWhiteSpace(nameof(logFileContent));
             format.NotNull(nameof(format));
-            repositoryRoot.NotNull(nameof(repositoryRoot));
 
-            return context.MsBuildCodeAnalysis(MsBuildCodeAnalysisSettings.FromContent(logFileContent, format, repositoryRoot));
+            return context.MsBuildCodeAnalysis(MsBuildCodeAnalysisSettings.FromContent(logFileContent, format));
         }
 
         /// <summary>
@@ -150,8 +142,7 @@
         ///     var settings =
         ///         MsBuildCodeAnalysisSettings.FromFilePath(
         ///             "C:\build\msbuild.log",
-        ///             MsBuildXmlFileLoggerFormat,
-        ///             repoRoot);
+        ///             MsBuildXmlFileLoggerFormat);
         ///
         ///     ReportCodeAnalysisIssuesToPullRequest(
         ///         MsBuildCodeAnalysis(settings),

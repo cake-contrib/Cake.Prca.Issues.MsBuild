@@ -25,6 +25,8 @@
         protected ICakeLog Log { get; private set; }
 
         /// <inheritdoc/>
-        public abstract IEnumerable<ICodeAnalysisIssue> ReadIssues(MsBuildCodeAnalysisSettings settings);
+        public abstract IEnumerable<ICodeAnalysisIssue> ReadIssues(
+            ReportCodeAnalysisIssuesToPullRequestSettings prcaSettings,
+            MsBuildCodeAnalysisSettings settings);
     }
 }
