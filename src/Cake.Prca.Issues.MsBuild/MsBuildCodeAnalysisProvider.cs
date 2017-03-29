@@ -1,5 +1,6 @@
 ﻿namespace Cake.Prca.Issues.MsBuild
 {
+    using System;
     using System.Collections.Generic;
     using Core.Diagnostics;
 
@@ -24,7 +25,7 @@
         }
 
         /// <inheritdoc />
-        public override IEnumerable<ICodeAnalysisIssue> ReadIssues()
+        public override IEnumerable<ICodeAnalysisIssue> ReadIssues(PrcaCommentFormat format)
         {
             return this.settings.Format.ReadIssues(this.settings);
         }

@@ -53,7 +53,7 @@
                     continue;
                 }
 
-                result.Add(new CodeAnalysisIssue(
+                result.Add(new CodeAnalysisIssue<MsBuildCodeAnalysisProvider>(
                     fileName,
                     line,
                     warning.Value,
