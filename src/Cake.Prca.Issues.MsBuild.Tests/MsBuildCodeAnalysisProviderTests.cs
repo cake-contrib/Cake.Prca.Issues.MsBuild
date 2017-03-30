@@ -34,25 +34,5 @@
                 result.IsArgumentNullException("settings");
             }
         }
-
-        public sealed class TheReadIssuesMethod
-        {
-            [Fact]
-            public void Should_Throw_If_PrcaSettings_Is_Null()
-            {
-                // Given
-                var log = new FakeLog();
-                var provider =
-                    new MsBuildCodeAnalysisProvider(
-                        log,
-                        MsBuildCodeAnalysisSettings.FromContent("Foo", new XmlFileLoggerFormat(log)));
-
-                // When
-                var result = Record.Exception(() => provider.ReadIssues(PrcaCommentFormat.PlainText));
-
-                // Then
-                result.IsInvalidOperationException("Initialize needs to be called first.");
-            }
-        }
     }
 }

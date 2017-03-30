@@ -1,6 +1,5 @@
 ﻿namespace Cake.Prca.Issues.MsBuild
 {
-    using System;
     using System.Collections.Generic;
     using Core.Diagnostics;
 
@@ -25,13 +24,8 @@
         }
 
         /// <inheritdoc />
-        public override IEnumerable<ICodeAnalysisIssue> ReadIssues(PrcaCommentFormat format)
+        protected override IEnumerable<ICodeAnalysisIssue> InternalReadIssues(PrcaCommentFormat format)
         {
-            if (this.PrcaSettings == null)
-            {
-                throw new InvalidOperationException("Initialize needs to be called first.");
-            }
-
             return this.settings.Format.ReadIssues(this.PrcaSettings, this.settings);
         }
     }

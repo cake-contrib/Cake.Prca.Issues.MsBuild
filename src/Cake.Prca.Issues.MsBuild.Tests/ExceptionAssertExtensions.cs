@@ -16,11 +16,5 @@
             Assert.IsType<ArgumentOutOfRangeException>(exception);
             Assert.Equal(parameterName, ((ArgumentOutOfRangeException)exception).ParamName);
         }
-
-        public static void IsInvalidOperationException(this Exception exception, string message)
-        {
-            Assert.IsType<InvalidOperationException>(exception);
-            Assert.Equal(message, exception.Message);
-        }
     }
 }
