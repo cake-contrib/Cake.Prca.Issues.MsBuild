@@ -61,7 +61,8 @@
                     line,
                     warning.Value,
                     0,
-                    rule));
+                    rule,
+                    RuleUrlResolver.ResolveRuleUrl(rule)));
             }
 
             return result;
@@ -113,12 +114,7 @@
             }
 
             rule = codeAttr.Value;
-            if (string.IsNullOrWhiteSpace(rule))
-            {
-                return false;
-            }
-
-            return true;
+            return !string.IsNullOrWhiteSpace(rule);
         }
 
         /// <summary>

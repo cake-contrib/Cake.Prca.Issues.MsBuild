@@ -61,6 +61,7 @@
     <Compile Include="MsBuildCodeAnalysisProviderAliases.cs" />
     <Compile Include="MsBuildCodeAnalysisSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RuleUrlResolver.cs" />
     <Compile Include="XmlFileLoggerFormat.cs" />
   </ItemGroup>
   <ItemGroup>
