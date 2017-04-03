@@ -8,6 +8,22 @@
     /// </summary>
     internal class MsBuildRuleUrlResolver : BaseRuleUrlResolver<MsBuildRuleDescription>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MsBuildRuleUrlResolver"/> class.
+        /// </summary>
+        public MsBuildRuleUrlResolver()
+        {
+            // Add resolver for common known issue categories.
+            this.AddUrlResolver(x =>
+                x.Category.ToUpperInvariant() == "CA" ?
+                    new Uri("https://www.google.im/search?q=%22" + x.Rule + ":%22+site:msdn.microsoft.com") :
+                    null);
+            this.AddUrlResolver(x =>
+                x.Category.ToUpperInvariant() == "SA" ?
+                    new Uri("https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/" + x.Rule + ".md") :
+                    null);
+        }
+
         /// <inheritdoc/>
         protected override bool TryGetRuleDescription(string rule, MsBuildRuleDescription ruleDescription)
         {
@@ -44,20 +60,6 @@
             ruleDescription.Category = categoryBuilder.ToString();
 
             return true;
-        }
-
-        /// <inheritdoc/>
-        protected override Uri GetRuleUri(MsBuildRuleDescription ruleDescription)
-        {
-            switch (ruleDescription.Category.ToLowerInvariant())
-            {
-                case "ca":
-                    return new Uri("https://www.google.im/search?q=%22" + ruleDescription.Rule + ":%22+site:msdn.microsoft.com");
-                case "sa":
-                    return new Uri("https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/" + ruleDescription.Rule + ".md");
-                default:
-                    return null;
-            }
         }
     }
 }
