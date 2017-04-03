@@ -8,10 +8,13 @@
     /// </summary>
     internal class MsBuildRuleUrlResolver : BaseRuleUrlResolver<MsBuildRuleDescription>
     {
+        private static readonly Lazy<MsBuildRuleUrlResolver> InstanceValue =
+            new Lazy<MsBuildRuleUrlResolver>(() => new MsBuildRuleUrlResolver());
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MsBuildRuleUrlResolver"/> class.
         /// </summary>
-        public MsBuildRuleUrlResolver()
+        private MsBuildRuleUrlResolver()
         {
             // Add resolver for common known issue categories.
             this.AddUrlResolver(x =>
@@ -23,6 +26,11 @@
                     new Uri("https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/" + x.Rule + ".md") :
                     null);
         }
+
+        /// <summary>
+        /// Gets the instance of the rule resolver.
+        /// </summary>
+        public static MsBuildRuleUrlResolver Instance => InstanceValue.Value;
 
         /// <inheritdoc/>
         protected override bool TryGetRuleDescription(string rule, MsBuildRuleDescription ruleDescription)

@@ -1,5 +1,6 @@
 ﻿namespace Cake.Prca.Issues.MsBuild
 {
+    using System;
     using Core;
     using Core.Annotations;
     using Core.IO;
@@ -12,6 +13,70 @@
     [CakeNamespaceImport("Cake.Prca.Issues.MsBuild")]
     public static class MsBuildCodeAnalysisProviderAliases
     {
+        /// <summary>
+        /// Registers a new resolver which with a specific priority.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="resolver">Resolver which returns an <see cref="Uri"/> linking to a site
+        /// containing help for a specific <see cref="BaseRuleDescription"/>.</param>
+        /// <example>
+        /// <para>Adds a provider of default priority returning a link for all rules of the category <c>CA</c> to
+        /// search <c>msdn.microsoft.com</c> with Google for the rule:</para>
+        /// <code>
+        /// <![CDATA[
+        /// MsBuildAddRuleUrlResolver(x =>
+        ///     x.Category.ToUpperInvariant() == "CA" ?
+        ///     new Uri("https://www.google.com/search?q=%22" + x.Rule + ":%22+site:msdn.microsoft.com") :
+        ///     null)
+        /// ]]>
+        /// </code>
+        /// </example>
+        [CakeMethodAlias]
+        [CakeAliasCategory(CakeAliasConstants.CodeAnalysisProviderCakeAliasCategory)]
+        public static void MsBuildAddRuleUrlResolver(
+            this ICakeContext context,
+            Func<MsBuildRuleDescription, Uri> resolver)
+        {
+            context.NotNull(nameof(context));
+            resolver.NotNull(nameof(resolver));
+
+            MsBuildRuleUrlResolver.Instance.AddUrlResolver(resolver);
+        }
+
+        /// <summary>
+        /// Registers a new resolver which with a specific priority.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="resolver">Resolver which returns an <see cref="Uri"/> linking to a site
+        /// containing help for a specific <see cref="BaseRuleDescription"/>.</param>
+        /// <param name="priority">Priority of the resolver. Resolver with a higher priority are considered
+        /// first during resolving of the URL.</param>
+        /// <example>
+        /// <para>Adds a provider of priority 5 returning a link for all rules of the category <c>CA</c> to
+        /// search <c>msdn.microsoft.com</c> with Google for the rule:</para>
+        /// <code>
+        /// <![CDATA[
+        /// MsBuildAddRuleUrlResolver(x =>
+        ///     x.Category.ToUpperInvariant() == "CA" ?
+        ///     new Uri("https://www.google.com/search?q=%22" + x.Rule + ":%22+site:msdn.microsoft.com") :
+        ///     null,
+        ///     5)
+        /// ]]>
+        /// </code>
+        /// </example>
+        [CakeMethodAlias]
+        [CakeAliasCategory(CakeAliasConstants.CodeAnalysisProviderCakeAliasCategory)]
+        public static void MsBuildAddRuleUrlResolver(
+            this ICakeContext context,
+            Func<MsBuildRuleDescription, Uri> resolver,
+            int priority)
+        {
+            context.NotNull(nameof(context));
+            resolver.NotNull(nameof(resolver));
+
+            MsBuildRuleUrlResolver.Instance.AddUrlResolver(resolver, priority);
+        }
+
         /// <summary>
         /// <para>
         /// Gets an instance for the MsBuild log format as written by the <code>XmlFileLogger</code> class
