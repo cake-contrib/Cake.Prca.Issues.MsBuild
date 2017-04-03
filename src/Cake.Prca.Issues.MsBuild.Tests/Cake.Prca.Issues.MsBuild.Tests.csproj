@@ -79,7 +79,7 @@
   <ItemGroup>
     <Compile Include="ExceptionAssertExtensions.cs" />
     <Compile Include="MsBuildCodeAnalysisSettingsTests.cs" />
-    <Compile Include="RuleUrlResolverTests.cs" />
+    <Compile Include="MsBuildRuleUrlResolverTests.cs" />
     <Compile Include="XmlFileLoggerFormatTests.cs" />
     <Compile Include="MsBuildCodeAnalysisProviderTests.cs" />
     <Compile Include="MsBuildCodeAnalysisProviderFixture.cs" />

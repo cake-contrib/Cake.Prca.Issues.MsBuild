@@ -3,7 +3,7 @@
     using Shouldly;
     using Xunit;
 
-    public class RuleUrlResolverTests
+    public class MsBuildRuleUrlResolverTests
     {
         public sealed class TheResolveRuleUrlMethod
         {
@@ -11,7 +11,7 @@
             public void Should_Throw_If_Rule_Is_Null()
             {
                 // Given / When
-                var result = Record.Exception(() => RuleUrlResolver.ResolveRuleUrl(null));
+                var result = Record.Exception(() => new MsBuildRuleUrlResolver().ResolveRuleUrl(null));
 
                 // Then
                 result.IsArgumentNullException("rule");
@@ -21,7 +21,7 @@
             public void Should_Throw_If_Rule_Is_Empty()
             {
                 // Given / When
-                var result = Record.Exception(() => RuleUrlResolver.ResolveRuleUrl(string.Empty));
+                var result = Record.Exception(() => new MsBuildRuleUrlResolver().ResolveRuleUrl(string.Empty));
 
                 // Then
                 result.IsArgumentOutOfRangeException("rule");
@@ -31,7 +31,7 @@
             public void Should_Throw_If_Rule_Is_WhiteSpace()
             {
                 // Given / When
-                var result = Record.Exception(() => RuleUrlResolver.ResolveRuleUrl(" "));
+                var result = Record.Exception(() => new MsBuildRuleUrlResolver().ResolveRuleUrl(" "));
 
                 // Then
                 result.IsArgumentOutOfRangeException("rule");
@@ -42,8 +42,11 @@
             [InlineData("SA1652", "https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1652.md")]
             public void Should_Resolve_Url(string rule, string expectedUrl)
             {
-                // Given / When
-                var ruleUrl = RuleUrlResolver.ResolveRuleUrl(rule);
+                // Given
+                var urlResolver = new MsBuildRuleUrlResolver();
+
+                // When
+                var ruleUrl = urlResolver.ResolveRuleUrl(rule);
 
                 // Then
                 ruleUrl.ToString().ShouldBe(expectedUrl);
@@ -56,8 +59,11 @@
             [InlineData("CS0219")]
             public void Should_Return_Null_For_Unknown_Rules(string rule)
             {
-                // Given / When
-                var ruleUrl = RuleUrlResolver.ResolveRuleUrl(rule);
+                // Given
+                var urlResolver = new MsBuildRuleUrlResolver();
+
+                // When
+                var ruleUrl = urlResolver.ResolveRuleUrl(rule);
 
                 // Then
                 ruleUrl.ShouldBeNull();
