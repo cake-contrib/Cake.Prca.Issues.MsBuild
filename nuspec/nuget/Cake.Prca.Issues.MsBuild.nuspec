@@ -16,7 +16,7 @@
     <tags>Cake Script PullRequest CodeAnalysis Cake-Prca-IssueProvider Linting MsBuild</tags>
     <releaseNotes>https://github.com/cake-contrib/Cake.Prca.Issues.MsBuild/releases/tag/0.2.1</releaseNotes>
     <dependencies>
-      <dependency id="Cake.Prca" version="[0.2,0.3)" />
+      <dependency id="Cake.Prca" version="[0.3,0.4)" />
     </dependencies>
   </metadata>
   <files>

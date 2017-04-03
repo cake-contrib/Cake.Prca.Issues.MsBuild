@@ -4,14 +4,13 @@
     using System.IO;
     using System.Linq;
     using System.Text;
-    using Core.IO;
     using Shouldly;
     using Testing;
     using Xunit;
 
     public class MsBuildCodeAnalysisSettingsTests
     {
-        public sealed class TheMsBuildCodeAnalysisSettings
+        public sealed class TheMsBuildCodeAnalysisSettingsCtor
         {
             [Fact]
             public void Should_Throw_If_LogFilePath_Is_Null()
@@ -20,8 +19,7 @@
                 var result = Record.Exception(() =>
                     MsBuildCodeAnalysisSettings.FromFilePath(
                         null,
-                        new XmlFileLoggerFormat(new FakeLog()),
-                        new DirectoryPath(@"C:\")));
+                        new XmlFileLoggerFormat(new FakeLog())));
 
                 // Then
                 result.IsArgumentNullException("logFilePath");
@@ -34,25 +32,10 @@
                 var result = Record.Exception(() =>
                     MsBuildCodeAnalysisSettings.FromFilePath(
                         @"C:\foo.log",
-                        null,
-                        new DirectoryPath(@"C:\")));
-
-                // Then
-                result.IsArgumentNullException("format");
-            }
-
-            [Fact]
-            public void Should_Throw_If_RepositoryRoot_For_LogFilePath_Is_Null()
-            {
-                // Given / When
-                var result = Record.Exception(() =>
-                    MsBuildCodeAnalysisSettings.FromFilePath(
-                        @"C:\foo.log",
-                        new XmlFileLoggerFormat(new FakeLog()),
                         null));
 
                 // Then
-                result.IsArgumentNullException("repositoryRoot");
+                result.IsArgumentNullException("format");
             }
 
             [Fact]
@@ -62,8 +45,7 @@
                 var result = Record.Exception(() =>
                     MsBuildCodeAnalysisSettings.FromContent(
                         null,
-                        new XmlFileLoggerFormat(new FakeLog()),
-                        new DirectoryPath(@"C:\")));
+                        new XmlFileLoggerFormat(new FakeLog())));
 
                 // Then
                 result.IsArgumentNullException("logFileContent");
@@ -76,8 +58,7 @@
                 var result = Record.Exception(() =>
                     MsBuildCodeAnalysisSettings.FromContent(
                         string.Empty,
-                        new XmlFileLoggerFormat(new FakeLog()),
-                        new DirectoryPath(@"C:\")));
+                        new XmlFileLoggerFormat(new FakeLog())));
 
                 // Then
                 result.IsArgumentOutOfRangeException("logFileContent");
@@ -90,8 +71,7 @@
                 var result = Record.Exception(() =>
                     MsBuildCodeAnalysisSettings.FromContent(
                         " ",
-                        new XmlFileLoggerFormat(new FakeLog()),
-                        new DirectoryPath(@"C:\")));
+                        new XmlFileLoggerFormat(new FakeLog())));
 
                 // Then
                 result.IsArgumentOutOfRangeException("logFileContent");
@@ -104,25 +84,10 @@
                 var result = Record.Exception(() =>
                     MsBuildCodeAnalysisSettings.FromContent(
                         "foo",
-                        null,
-                        new DirectoryPath(@"C:\")));
-
-                // Then
-                result.IsArgumentNullException("format");
-            }
-
-            [Fact]
-            public void Should_Throw_If_RepositoryRoot_For_LogFileContent_Is_Null()
-            {
-                // Given / When
-                var result = Record.Exception(() =>
-                    MsBuildCodeAnalysisSettings.FromContent(
-                        "foo",
-                        new XmlFileLoggerFormat(new FakeLog()),
                         null));
 
                 // Then
-                result.IsArgumentNullException("repositoryRoot");
+                result.IsArgumentNullException("format");
             }
 
             [Fact]
@@ -131,21 +96,19 @@
                 // Given
                 const string logFileContent = "foo";
                 var format = new XmlFileLoggerFormat(new FakeLog());
-                var repoRoot = new DirectoryPath(@"C:\");
 
                 // When
-                var settings = MsBuildCodeAnalysisSettings.FromContent(logFileContent, format, repoRoot);
+                var settings = MsBuildCodeAnalysisSettings.FromContent(logFileContent, format);
 
                 // Then
                 settings.LogFileContent.ShouldBe(logFileContent);
                 settings.Format.ShouldBe(format);
-                settings.RepositoryRoot.ShouldBe(repoRoot);
             }
 
             [Fact]
             public void Should_Read_File_From_Disk()
             {
-                var fileName = System.IO.Path.GetTempFileName();
+                var fileName = Path.GetTempFileName();
                 try
                 {
                     // Given
@@ -168,8 +131,7 @@
                     var settings =
                         MsBuildCodeAnalysisSettings.FromFilePath(
                             fileName,
-                            new XmlFileLoggerFormat(new FakeLog()),
-                            new DirectoryPath(@"C:\"));
+                            new XmlFileLoggerFormat(new FakeLog()));
 
                     // Then
                     settings.LogFileContent.ShouldBe(expected);
