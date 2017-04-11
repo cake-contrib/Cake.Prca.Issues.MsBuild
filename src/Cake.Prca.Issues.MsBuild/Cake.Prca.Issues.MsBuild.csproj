@@ -42,7 +42,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Cake.Prca, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cake.Prca.0.3.0-beta0002\lib\net45\Cake.Prca.dll</HintPath>
+      <HintPath>..\packages\Cake.Prca.0.3.0-beta0003\lib\net45\Cake.Prca.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -55,12 +55,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MsBuildRuleDescription.cs" />
     <Compile Include="ILogFileFormat.cs" />
     <Compile Include="LogFileFormat.cs" />
     <Compile Include="MsBuildCodeAnalysisProvider.cs" />
     <Compile Include="MsBuildCodeAnalysisProviderAliases.cs" />
     <Compile Include="MsBuildCodeAnalysisSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MsBuildRuleUrlResolver.cs" />
     <Compile Include="XmlFileLoggerFormat.cs" />
   </ItemGroup>
   <ItemGroup>

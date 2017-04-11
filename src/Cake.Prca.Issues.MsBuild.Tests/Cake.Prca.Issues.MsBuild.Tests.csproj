@@ -40,7 +40,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Cake.Prca, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cake.Prca.0.3.0-beta0002\lib\net45\Cake.Prca.dll</HintPath>
+      <HintPath>..\packages\Cake.Prca.0.3.0-beta0003\lib\net45\Cake.Prca.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Cake.Testing, Version=0.16.2.0, Culture=neutral, processorArchitecture=MSIL">
@@ -79,6 +79,7 @@
   <ItemGroup>
     <Compile Include="ExceptionAssertExtensions.cs" />
     <Compile Include="MsBuildCodeAnalysisSettingsTests.cs" />
+    <Compile Include="MsBuildRuleUrlResolverTests.cs" />
     <Compile Include="XmlFileLoggerFormatTests.cs" />
     <Compile Include="MsBuildCodeAnalysisProviderTests.cs" />
     <Compile Include="MsBuildCodeAnalysisProviderFixture.cs" />

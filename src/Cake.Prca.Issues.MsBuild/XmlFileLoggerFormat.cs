@@ -56,12 +56,14 @@
                     continue;
                 }
 
+                var urlResolver = new MsBuildRuleUrlResolver();
                 result.Add(new CodeAnalysisIssue<MsBuildCodeAnalysisProvider>(
                     fileName,
                     line,
                     warning.Value,
                     0,
-                    rule));
+                    rule,
+                    urlResolver.ResolveRuleUrl(rule)));
             }
 
             return result;
@@ -113,12 +115,7 @@
             }
 
             rule = codeAttr.Value;
-            if (string.IsNullOrWhiteSpace(rule))
-            {
-                return false;
-            }
-
-            return true;
+            return !string.IsNullOrWhiteSpace(rule);
         }
 
         /// <summary>
