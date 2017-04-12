@@ -10,8 +10,11 @@
         /// <summary>
         /// Gets all code analysis issues.
         /// </summary>
-        /// <param name="settings">Settings to use.</param>
+        /// <param name="prcaSettings">General settings to use.</param>
+        /// <param name="settings">Settings for code analysis provider to use.</param>
         /// <returns>List of code analysis issues</returns>
-        IEnumerable<ICodeAnalysisIssue> ReadIssues(MsBuildCodeAnalysisSettings settings);
+        IEnumerable<ICodeAnalysisIssue> ReadIssues(
+            ReportCodeAnalysisIssuesToPullRequestSettings prcaSettings,
+            MsBuildCodeAnalysisSettings settings);
     }
 }

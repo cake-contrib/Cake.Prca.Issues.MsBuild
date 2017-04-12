@@ -7,7 +7,7 @@
 
     public class XmlFileLoggerFormatTests
     {
-        public sealed class TheXmlFileLoggerFormat
+        public sealed class TheXmlFileLoggerFormatCtor
         {
             [Fact]
             public void Should_Throw_If_Log_Is_Null()
@@ -18,7 +18,10 @@
                 // Then
                 result.IsArgumentNullException("log");
             }
+        }
 
+        public sealed class TheReadIssuesMethod
+        {
             [Fact]
             public void Should_Read_Issue_With_File_Correct()
             {

@@ -21,8 +21,11 @@
         }
 
         /// <inheritdoc/>
-        public override IEnumerable<ICodeAnalysisIssue> ReadIssues(MsBuildCodeAnalysisSettings settings)
+        public override IEnumerable<ICodeAnalysisIssue> ReadIssues(
+            ReportCodeAnalysisIssuesToPullRequestSettings prcaSettings,
+            MsBuildCodeAnalysisSettings settings)
         {
+            prcaSettings.NotNull(nameof(prcaSettings));
             settings.NotNull(nameof(settings));
 
             var result = new List<ICodeAnalysisIssue>();
@@ -34,7 +37,7 @@
             {
                 // Read affected file from the warning.
                 string fileName;
-                if (!this.TryGetFile(warning, settings, out fileName))
+                if (!this.TryGetFile(warning, prcaSettings, out fileName))
                 {
                     continue;
                 }
@@ -53,12 +56,13 @@
                     continue;
                 }
 
-                result.Add(new CodeAnalysisIssue(
+                result.Add(new CodeAnalysisIssue<MsBuildCodeAnalysisProvider>(
                     fileName,
                     line,
                     warning.Value,
                     0,
-                    rule));
+                    rule,
+                    MsBuildRuleUrlResolver.Instance.ResolveRuleUrl(rule)));
             }
 
             return result;
@@ -110,22 +114,20 @@
             }
 
             rule = codeAttr.Value;
-            if (string.IsNullOrWhiteSpace(rule))
-            {
-                return false;
-            }
-
-            return true;
+            return !string.IsNullOrWhiteSpace(rule);
         }
 
         /// <summary>
         /// Reads the affected file path from a warning logged in a MsBuild log.
         /// </summary>
         /// <param name="warning">Warning element from MsBuild log.</param>
-        /// <param name="settings">Settings to use.</param>
+        /// <param name="prcaSettings">General settings to use.</param>
         /// <param name="fileName">Returns the full path to the affected file.</param>
         /// <returns>True if the file path could be parsed.</returns>
-        private bool TryGetFile(XElement warning, MsBuildCodeAnalysisSettings settings, out string fileName)
+        private bool TryGetFile(
+            XElement warning,
+            ReportCodeAnalysisIssuesToPullRequestSettings prcaSettings,
+            out string fileName)
         {
             fileName = string.Empty;
 
@@ -153,18 +155,18 @@
             }
 
             // Ignore files from outside the repository.
-            if (!fileName.IsSubpathOf(settings.RepositoryRoot.FullPath))
+            if (!fileName.IsSubpathOf(prcaSettings.RepositoryRoot.FullPath))
             {
                 this.Log.Warning(
                     "Ignored issue for file '{0}' since it is outside the repository folder at {1}.",
                     fileName,
-                    settings.RepositoryRoot);
+                    prcaSettings.RepositoryRoot);
 
                 return false;
             }
 
             // Make path relative to repository root.
-            fileName = fileName.Substring(settings.RepositoryRoot.FullPath.Length);
+            fileName = fileName.Substring(prcaSettings.RepositoryRoot.FullPath.Length);
 
             // Remove leading directory separator.
             if (fileName.StartsWith(Path.DirectorySeparatorChar.ToString()))

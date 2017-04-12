@@ -16,8 +16,7 @@
                         null,
                         MsBuildCodeAnalysisSettings.FromContent(
                             "Foo",
-                            new XmlFileLoggerFormat(new FakeLog()),
-                            @"c:\src")));
+                            new XmlFileLoggerFormat(new FakeLog()))));
 
                 // Then
                 result.IsArgumentNullException("log");

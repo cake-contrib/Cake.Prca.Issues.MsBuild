@@ -1,5 +1,6 @@
 ﻿namespace Cake.Prca.Issues.MsBuild
 {
+    using System;
     using Core;
     using Core.Annotations;
     using Core.IO;
@@ -12,6 +13,70 @@
     [CakeNamespaceImport("Cake.Prca.Issues.MsBuild")]
     public static class MsBuildCodeAnalysisProviderAliases
     {
+        /// <summary>
+        /// Registers a new URL resolver with default priority of 0.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="resolver">Resolver which returns an <see cref="Uri"/> linking to a site
+        /// containing help for a specific <see cref="BaseRuleDescription"/>.</param>
+        /// <example>
+        /// <para>Adds a provider with default priority of 0 returning a link for all rules of the category <c>CA</c> to
+        /// search <c>msdn.microsoft.com</c> with Google for the rule:</para>
+        /// <code>
+        /// <![CDATA[
+        /// MsBuildAddRuleUrlResolver(x =>
+        ///     x.Category.ToUpperInvariant() == "CA" ?
+        ///     new Uri("https://www.google.com/search?q=%22" + x.Rule + ":%22+site:msdn.microsoft.com") :
+        ///     null)
+        /// ]]>
+        /// </code>
+        /// </example>
+        [CakeMethodAlias]
+        [CakeAliasCategory(CakeAliasConstants.CodeAnalysisProviderCakeAliasCategory)]
+        public static void MsBuildAddRuleUrlResolver(
+            this ICakeContext context,
+            Func<MsBuildRuleDescription, Uri> resolver)
+        {
+            context.NotNull(nameof(context));
+            resolver.NotNull(nameof(resolver));
+
+            MsBuildRuleUrlResolver.Instance.AddUrlResolver(resolver);
+        }
+
+        /// <summary>
+        /// Registers a new URL resolver with a specific priority.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="resolver">Resolver which returns an <see cref="Uri"/> linking to a site
+        /// containing help for a specific <see cref="BaseRuleDescription"/>.</param>
+        /// <param name="priority">Priority of the resolver. Resolver with a higher priority are considered
+        /// first during resolving of the URL.</param>
+        /// <example>
+        /// <para>Adds a provider of priority 5 returning a link for all rules of the category <c>CA</c> to
+        /// search <c>msdn.microsoft.com</c> with Google for the rule:</para>
+        /// <code>
+        /// <![CDATA[
+        /// MsBuildAddRuleUrlResolver(x =>
+        ///     x.Category.ToUpperInvariant() == "CA" ?
+        ///     new Uri("https://www.google.com/search?q=%22" + x.Rule + ":%22+site:msdn.microsoft.com") :
+        ///     null,
+        ///     5)
+        /// ]]>
+        /// </code>
+        /// </example>
+        [CakeMethodAlias]
+        [CakeAliasCategory(CakeAliasConstants.CodeAnalysisProviderCakeAliasCategory)]
+        public static void MsBuildAddRuleUrlResolver(
+            this ICakeContext context,
+            Func<MsBuildRuleDescription, Uri> resolver,
+            int priority)
+        {
+            context.NotNull(nameof(context));
+            resolver.NotNull(nameof(resolver));
+
+            MsBuildRuleUrlResolver.Instance.AddUrlResolver(resolver, priority);
+        }
+
         /// <summary>
         /// <para>
         /// Gets an instance for the MsBuild log format as written by the <code>XmlFileLogger</code> class
@@ -57,7 +122,6 @@
         /// <param name="logFilePath">Path to the the MsBuild log file.
         /// The log file needs to be in the format as defined by the <paramref name="format"/> parameter.</param>
         /// <param name="format">Format of the provided MsBuild log file.</param>
-        /// <param name="repositoryRoot">Root path of the repository.</param>
         /// <returns>Instance of a provider for code analysis issues reported as MsBuild warnings.</returns>
         /// <example>
         /// <para>Report code analysis issues reported as MsBuild warnings to a TFS pull request:</para>
@@ -67,12 +131,11 @@
         ///     ReportCodeAnalysisIssuesToPullRequest(
         ///         MsBuildCodeAnalysisFromFilePath(
         ///             "C:\build\msbuild.log",
-        ///             MsBuildXmlFileLoggerFormat,
-        ///             repoRoot),
+        ///             MsBuildXmlFileLoggerFormat),
         ///         TfsPullRequests(
         ///             new Uri("http://myserver:8080/tfs/defaultcollection/myproject/_git/myrepository"),
         ///             "refs/heads/feature/myfeature",
-        ///             PrcaAuthenticationNtlm()),
+        ///             TfsAuthenticationNtlm()),
         ///         repoRoot);
         /// ]]>
         /// </code>
@@ -82,15 +145,13 @@
         public static ICodeAnalysisProvider MsBuildCodeAnalysisFromFilePath(
             this ICakeContext context,
             FilePath logFilePath,
-            ILogFileFormat format,
-            DirectoryPath repositoryRoot)
+            ILogFileFormat format)
         {
             context.NotNull(nameof(context));
             logFilePath.NotNull(nameof(logFilePath));
             format.NotNull(nameof(format));
-            repositoryRoot.NotNull(nameof(repositoryRoot));
 
-            return context.MsBuildCodeAnalysis(MsBuildCodeAnalysisSettings.FromFilePath(logFilePath, format, repositoryRoot));
+            return context.MsBuildCodeAnalysis(MsBuildCodeAnalysisSettings.FromFilePath(logFilePath, format));
         }
 
         /// <summary>
@@ -100,7 +161,6 @@
         /// <param name="logFileContent">Content of the the MsBuild log file.
         /// The log file needs to be in the format as defined by the <paramref name="format"/> parameter.</param>
         /// <param name="format">Format of the provided MsBuild log file.</param>
-        /// <param name="repositoryRoot">Root path of the repository.</param>
         /// <returns>Instance of a provider for code analysis issues reported as MsBuild warnings.</returns>
         /// <example>
         /// <para>Report code analysis issues reported as MsBuild warnings to a TFS pull request:</para>
@@ -110,12 +170,11 @@
         ///     ReportCodeAnalysisIssuesToPullRequest(
         ///         MsBuildCodeAnalysisFromContent(
         ///             logFileContent,
-        ///             MsBuildXmlFileLoggerFormat,
-        ///             repoRoot),
+        ///             MsBuildXmlFileLoggerFormat),
         ///         TfsPullRequests(
         ///             new Uri("http://myserver:8080/tfs/defaultcollection/myproject/_git/myrepository"),
         ///             "refs/heads/feature/myfeature",
-        ///             PrcaAuthenticationNtlm()),
+        ///             TfsAuthenticationNtlm()),
         ///         repoRoot);
         /// ]]>
         /// </code>
@@ -125,15 +184,13 @@
         public static ICodeAnalysisProvider MsBuildCodeAnalysisFromContent(
             this ICakeContext context,
             string logFileContent,
-            ILogFileFormat format,
-            DirectoryPath repositoryRoot)
+            ILogFileFormat format)
         {
             context.NotNull(nameof(context));
             logFileContent.NotNullOrWhiteSpace(nameof(logFileContent));
             format.NotNull(nameof(format));
-            repositoryRoot.NotNull(nameof(repositoryRoot));
 
-            return context.MsBuildCodeAnalysis(MsBuildCodeAnalysisSettings.FromContent(logFileContent, format, repositoryRoot));
+            return context.MsBuildCodeAnalysis(MsBuildCodeAnalysisSettings.FromContent(logFileContent, format));
         }
 
         /// <summary>
@@ -150,15 +207,14 @@
         ///     var settings =
         ///         MsBuildCodeAnalysisSettings.FromFilePath(
         ///             "C:\build\msbuild.log",
-        ///             MsBuildXmlFileLoggerFormat,
-        ///             repoRoot);
+        ///             MsBuildXmlFileLoggerFormat);
         ///
         ///     ReportCodeAnalysisIssuesToPullRequest(
         ///         MsBuildCodeAnalysis(settings),
         ///         TfsPullRequests(
         ///             new Uri("http://myserver:8080/tfs/defaultcollection/myproject/_git/myrepository"),
         ///             "refs/heads/feature/myfeature",
-        ///             PrcaAuthenticationNtlm()),
+        ///             TfsAuthenticationNtlm()),
         ///         repoRoot);
         /// ]]>
         /// </code>

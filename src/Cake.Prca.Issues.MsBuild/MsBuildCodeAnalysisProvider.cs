@@ -24,9 +24,9 @@
         }
 
         /// <inheritdoc />
-        public override IEnumerable<ICodeAnalysisIssue> ReadIssues()
+        protected override IEnumerable<ICodeAnalysisIssue> InternalReadIssues(PrcaCommentFormat format)
         {
-            return this.settings.Format.ReadIssues(this.settings);
+            return this.settings.Format.ReadIssues(this.PrcaSettings, this.settings);
         }
     }
 }

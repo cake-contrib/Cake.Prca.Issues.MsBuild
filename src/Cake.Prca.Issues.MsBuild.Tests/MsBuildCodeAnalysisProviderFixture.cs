@@ -9,8 +9,7 @@
     {
         public MsBuildCodeAnalysisProviderFixture(string fileResourceName)
         {
-            this.Log = new FakeLog();
-            this.Log.Verbosity = Verbosity.Normal;
+            this.Log = new FakeLog { Verbosity = Verbosity.Normal };
 
             using (var stream = this.GetType().Assembly.GetManifestResourceStream("Cake.Prca.Issues.MsBuild.Tests.Testfiles." + fileResourceName))
             {
@@ -19,25 +18,31 @@
                     this.Settings =
                         MsBuildCodeAnalysisSettings.FromContent(
                             sr.ReadToEnd(),
-                            new XmlFileLoggerFormat(this.Log),
-                            new Core.IO.DirectoryPath(@"c:\Source\Cake.Prca"));
+                            new XmlFileLoggerFormat(this.Log));
                 }
             }
+
+            this.PrcaSettings =
+                new ReportCodeAnalysisIssuesToPullRequestSettings(@"c:\Source\Cake.Prca");
         }
 
         public FakeLog Log { get; set; }
 
         public MsBuildCodeAnalysisSettings Settings { get; set; }
 
+        public ReportCodeAnalysisIssuesToPullRequestSettings PrcaSettings { get; set; }
+
         public MsBuildCodeAnalysisProvider Create()
         {
-            return new MsBuildCodeAnalysisProvider(this.Log, this.Settings);
+            var provider = new MsBuildCodeAnalysisProvider(this.Log, this.Settings);
+            provider.Initialize(this.PrcaSettings);
+            return provider;
         }
 
         public IEnumerable<ICodeAnalysisIssue> ReadIssues()
         {
             var codeAnalysisProvider = this.Create();
-            return codeAnalysisProvider.ReadIssues();
+            return codeAnalysisProvider.ReadIssues(PrcaCommentFormat.PlainText);
         }
     }
 }
