@@ -56,14 +56,13 @@
                     continue;
                 }
 
-                var urlResolver = new MsBuildRuleUrlResolver();
                 result.Add(new CodeAnalysisIssue<MsBuildCodeAnalysisProvider>(
                     fileName,
                     line,
                     warning.Value,
                     0,
                     rule,
-                    urlResolver.ResolveRuleUrl(rule)));
+                    MsBuildRuleUrlResolver.Instance.ResolveRuleUrl(rule)));
             }
 
             return result;
