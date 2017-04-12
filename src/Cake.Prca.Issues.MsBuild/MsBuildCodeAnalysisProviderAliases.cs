@@ -14,7 +14,7 @@
     public static class MsBuildCodeAnalysisProviderAliases
     {
         /// <summary>
-        /// Registers a new resolver which with a specific priority.
+        /// Registers a new resolver with a specific priority.
         /// </summary>
         /// <param name="context">The context.</param>
         /// <param name="resolver">Resolver which returns an <see cref="Uri"/> linking to a site
@@ -44,7 +44,7 @@
         }
 
         /// <summary>
-        /// Registers a new resolver which with a specific priority.
+        /// Registers a new resolver with a specific priority.
         /// </summary>
         /// <param name="context">The context.</param>
         /// <param name="resolver">Resolver which returns an <see cref="Uri"/> linking to a site
