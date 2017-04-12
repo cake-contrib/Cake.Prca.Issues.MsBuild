@@ -14,13 +14,13 @@
     public static class MsBuildCodeAnalysisProviderAliases
     {
         /// <summary>
-        /// Registers a new resolver with a specific priority.
+        /// Registers a new URL resolver with default priority of 0.
         /// </summary>
         /// <param name="context">The context.</param>
         /// <param name="resolver">Resolver which returns an <see cref="Uri"/> linking to a site
         /// containing help for a specific <see cref="BaseRuleDescription"/>.</param>
         /// <example>
-        /// <para>Adds a provider of default priority returning a link for all rules of the category <c>CA</c> to
+        /// <para>Adds a provider with default priority of 0 returning a link for all rules of the category <c>CA</c> to
         /// search <c>msdn.microsoft.com</c> with Google for the rule:</para>
         /// <code>
         /// <![CDATA[
@@ -44,7 +44,7 @@
         }
 
         /// <summary>
-        /// Registers a new resolver with a specific priority.
+        /// Registers a new URL resolver with a specific priority.
         /// </summary>
         /// <param name="context">The context.</param>
         /// <param name="resolver">Resolver which returns an <see cref="Uri"/> linking to a site
