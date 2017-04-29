@@ -5,7 +5,7 @@
     using Core.Diagnostics;
     using Testing;
 
-    public class MsBuildCodeAnalysisProviderFixture
+    internal class MsBuildCodeAnalysisProviderFixture
     {
         public MsBuildCodeAnalysisProviderFixture(string fileResourceName)
         {
