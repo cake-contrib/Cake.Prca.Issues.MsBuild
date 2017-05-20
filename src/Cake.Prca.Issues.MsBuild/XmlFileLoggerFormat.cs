@@ -9,7 +9,7 @@
     /// <summary>
     /// MsBuild log format as written by the <code>XmlFileLogger</code> class from MSBuild Extension Pack.
     /// </summary>
-    public class XmlFileLoggerFormat : LogFileFormat
+    internal class XmlFileLoggerFormat : LogFileFormat
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlFileLoggerFormat"/> class.
