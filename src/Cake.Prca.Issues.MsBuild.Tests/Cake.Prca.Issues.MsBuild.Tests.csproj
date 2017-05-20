@@ -78,11 +78,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExceptionAssertExtensions.cs" />
-    <Compile Include="MsBuildCodeAnalysisSettingsTests.cs" />
+    <Compile Include="MsBuildIssuesSettingsTests.cs" />
     <Compile Include="MsBuildRuleUrlResolverTests.cs" />
     <Compile Include="XmlFileLoggerFormatTests.cs" />
-    <Compile Include="MsBuildCodeAnalysisProviderTests.cs" />
-    <Compile Include="MsBuildCodeAnalysisProviderFixture.cs" />
+    <Compile Include="MsBuildIssuesProviderTests.cs" />
+    <Compile Include="MsBuildIssuesProviderFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -5,9 +5,9 @@
     using Core.Diagnostics;
     using Testing;
 
-    internal class MsBuildCodeAnalysisProviderFixture
+    internal class MsBuildIssuesProviderFixture
     {
-        public MsBuildCodeAnalysisProviderFixture(string fileResourceName)
+        public MsBuildIssuesProviderFixture(string fileResourceName)
         {
             this.Log = new FakeLog { Verbosity = Verbosity.Normal };
 
@@ -16,7 +16,7 @@
                 using (var sr = new StreamReader(stream))
                 {
                     this.Settings =
-                        MsBuildCodeAnalysisSettings.FromContent(
+                        MsBuildIssuesSettings.FromContent(
                             sr.ReadToEnd(),
                             new XmlFileLoggerFormat(this.Log));
                 }
@@ -28,13 +28,13 @@
 
         public FakeLog Log { get; set; }
 
-        public MsBuildCodeAnalysisSettings Settings { get; set; }
+        public MsBuildIssuesSettings Settings { get; set; }
 
         public ReportCodeAnalysisIssuesToPullRequestSettings PrcaSettings { get; set; }
 
-        public MsBuildCodeAnalysisProvider Create()
+        public MsBuildIssuesProvider Create()
         {
-            var provider = new MsBuildCodeAnalysisProvider(this.Log, this.Settings);
+            var provider = new MsBuildIssuesProvider(this.Log, this.Settings);
             provider.Initialize(this.PrcaSettings);
             return provider;
         }

@@ -23,7 +23,7 @@
         /// <inheritdoc/>
         public override IEnumerable<ICodeAnalysisIssue> ReadIssues(
             ReportCodeAnalysisIssuesToPullRequestSettings prcaSettings,
-            MsBuildCodeAnalysisSettings settings)
+            MsBuildIssuesSettings settings)
         {
             prcaSettings.NotNull(nameof(prcaSettings));
             settings.NotNull(nameof(settings));
@@ -56,7 +56,7 @@
                     continue;
                 }
 
-                result.Add(new CodeAnalysisIssue<MsBuildCodeAnalysisProvider>(
+                result.Add(new CodeAnalysisIssue<MsBuildIssuesProvider>(
                     fileName,
                     line,
                     warning.Value,

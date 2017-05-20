@@ -6,16 +6,16 @@
     /// <summary>
     /// Provider for code analysis issues reported as MsBuild warnings.
     /// </summary>
-    internal class MsBuildCodeAnalysisProvider : CodeAnalysisProvider
+    internal class MsBuildIssuesProvider : CodeAnalysisProvider
     {
-        private readonly MsBuildCodeAnalysisSettings settings;
+        private readonly MsBuildIssuesSettings settings;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MsBuildCodeAnalysisProvider"/> class.
+        /// Initializes a new instance of the <see cref="MsBuildIssuesProvider"/> class.
         /// </summary>
         /// <param name="log">The Cake log context.</param>
         /// <param name="settings">Settings for reading the log file.</param>
-        public MsBuildCodeAnalysisProvider(ICakeLog log, MsBuildCodeAnalysisSettings settings)
+        public MsBuildIssuesProvider(ICakeLog log, MsBuildIssuesSettings settings)
             : base(log)
         {
             settings.NotNull(nameof(settings));
