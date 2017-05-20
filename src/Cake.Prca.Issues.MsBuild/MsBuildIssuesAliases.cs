@@ -79,7 +79,7 @@
 
         /// <summary>
         /// <para>
-        /// Gets an instance for the MsBuild log format as written by the <code>XmlFileLogger</code> class
+        /// Gets an instance for the MsBuild log format as written by the <c>XmlFileLogger</c> class
         /// from MSBuild Extension Pack.
         /// </para>
         /// <para>
