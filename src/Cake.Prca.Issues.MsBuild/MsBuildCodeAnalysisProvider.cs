@@ -6,7 +6,7 @@
     /// <summary>
     /// Provider for code analysis issues reported as MsBuild warnings.
     /// </summary>
-    public class MsBuildCodeAnalysisProvider : CodeAnalysisProvider
+    internal class MsBuildCodeAnalysisProvider : CodeAnalysisProvider
     {
         private readonly MsBuildCodeAnalysisSettings settings;
 
