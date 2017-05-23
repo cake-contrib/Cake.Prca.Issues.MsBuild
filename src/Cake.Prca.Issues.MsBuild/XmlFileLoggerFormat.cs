@@ -7,7 +7,7 @@
     using Core.Diagnostics;
 
     /// <summary>
-    /// MsBuild log format as written by the <code>XmlFileLogger</code> class from MSBuild Extension Pack.
+    /// MsBuild log format as written by the <c>XmlFileLogger</c> class from MSBuild Extension Pack.
     /// </summary>
     internal class XmlFileLoggerFormat : LogFileFormat
     {
