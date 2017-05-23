@@ -128,7 +128,7 @@
         /// <![CDATA[
         ///     var repoRoot = new DirectoryPath("c:\repo");
         ///     ReportCodeAnalysisIssuesToPullRequest(
-        ///         MsBuildCodeAnalysisFromFilePath(
+        ///         MsBuildIssuesFromFilePath(
         ///             "C:\build\msbuild.log",
         ///             MsBuildXmlFileLoggerFormat),
         ///         TfsPullRequests(
@@ -167,7 +167,7 @@
         /// <![CDATA[
         ///     var repoRoot = new DirectoryPath("c:\repo");
         ///     ReportCodeAnalysisIssuesToPullRequest(
-        ///         MsBuildCodeAnalysisFromContent(
+        ///         MsBuildIssuesFromContent(
         ///             logFileContent,
         ///             MsBuildXmlFileLoggerFormat),
         ///         TfsPullRequests(
@@ -204,12 +204,12 @@
         /// <![CDATA[
         ///     var repoRoot = new DirectoryPath("c:\repo");
         ///     var settings =
-        ///         MsBuildCodeAnalysisSettings.FromFilePath(
+        ///         MsBuildIssuesSettings.FromFilePath(
         ///             "C:\build\msbuild.log",
         ///             MsBuildXmlFileLoggerFormat);
         ///
         ///     ReportCodeAnalysisIssuesToPullRequest(
-        ///         MsBuildCodeAnalysis(settings),
+        ///         MsBuildIssues(settings),
         ///         TfsPullRequests(
         ///             new Uri("http://myserver:8080/tfs/defaultcollection/myproject/_git/myrepository"),
         ///             "refs/heads/feature/myfeature",
