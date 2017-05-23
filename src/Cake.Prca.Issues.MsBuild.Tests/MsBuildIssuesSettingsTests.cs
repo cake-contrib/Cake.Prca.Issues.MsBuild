@@ -8,7 +8,7 @@
     using Testing;
     using Xunit;
 
-    public class MsBuildCodeAnalysisSettingsTests
+    public class MsBuildIssuesSettingsTests
     {
         public sealed class TheMsBuildCodeAnalysisSettingsCtor
         {
@@ -17,7 +17,7 @@
             {
                 // Given / When
                 var result = Record.Exception(() =>
-                    MsBuildCodeAnalysisSettings.FromFilePath(
+                    MsBuildIssuesSettings.FromFilePath(
                         null,
                         new XmlFileLoggerFormat(new FakeLog())));
 
@@ -30,7 +30,7 @@
             {
                 // Given / When
                 var result = Record.Exception(() =>
-                    MsBuildCodeAnalysisSettings.FromFilePath(
+                    MsBuildIssuesSettings.FromFilePath(
                         @"C:\foo.log",
                         null));
 
@@ -43,7 +43,7 @@
             {
                 // Given / When
                 var result = Record.Exception(() =>
-                    MsBuildCodeAnalysisSettings.FromContent(
+                    MsBuildIssuesSettings.FromContent(
                         null,
                         new XmlFileLoggerFormat(new FakeLog())));
 
@@ -56,7 +56,7 @@
             {
                 // Given / When
                 var result = Record.Exception(() =>
-                    MsBuildCodeAnalysisSettings.FromContent(
+                    MsBuildIssuesSettings.FromContent(
                         string.Empty,
                         new XmlFileLoggerFormat(new FakeLog())));
 
@@ -69,7 +69,7 @@
             {
                 // Given / When
                 var result = Record.Exception(() =>
-                    MsBuildCodeAnalysisSettings.FromContent(
+                    MsBuildIssuesSettings.FromContent(
                         " ",
                         new XmlFileLoggerFormat(new FakeLog())));
 
@@ -82,7 +82,7 @@
             {
                 // Given / When
                 var result = Record.Exception(() =>
-                    MsBuildCodeAnalysisSettings.FromContent(
+                    MsBuildIssuesSettings.FromContent(
                         "foo",
                         null));
 
@@ -98,7 +98,7 @@
                 var format = new XmlFileLoggerFormat(new FakeLog());
 
                 // When
-                var settings = MsBuildCodeAnalysisSettings.FromContent(logFileContent, format);
+                var settings = MsBuildIssuesSettings.FromContent(logFileContent, format);
 
                 // Then
                 settings.LogFileContent.ShouldBe(logFileContent);
@@ -129,7 +129,7 @@
 
                     // When
                     var settings =
-                        MsBuildCodeAnalysisSettings.FromFilePath(
+                        MsBuildIssuesSettings.FromFilePath(
                             fileName,
                             new XmlFileLoggerFormat(new FakeLog()));
 

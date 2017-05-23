@@ -58,9 +58,9 @@
     <Compile Include="MsBuildRuleDescription.cs" />
     <Compile Include="ILogFileFormat.cs" />
     <Compile Include="LogFileFormat.cs" />
-    <Compile Include="MsBuildCodeAnalysisProvider.cs" />
-    <Compile Include="MsBuildCodeAnalysisProviderAliases.cs" />
-    <Compile Include="MsBuildCodeAnalysisSettings.cs" />
+    <Compile Include="MsBuildIssuesProvider.cs" />
+    <Compile Include="MsBuildIssuesAliases.cs" />
+    <Compile Include="MsBuildIssuesSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MsBuildRuleUrlResolver.cs" />
     <Compile Include="XmlFileLoggerFormat.cs" />

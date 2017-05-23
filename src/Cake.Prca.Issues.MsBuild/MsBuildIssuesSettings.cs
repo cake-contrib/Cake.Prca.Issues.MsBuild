@@ -4,17 +4,17 @@
     using Core.IO;
 
     /// <summary>
-    /// Settings for <see cref="MsBuildCodeAnalysisProvider"/>.
+    /// Settings for <see cref="MsBuildIssuesProvider"/>.
     /// </summary>
-    public class MsBuildCodeAnalysisSettings
+    public class MsBuildIssuesSettings
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MsBuildCodeAnalysisSettings"/> class.
+        /// Initializes a new instance of the <see cref="MsBuildIssuesSettings"/> class.
         /// </summary>
         /// <param name="logFilePath">Path to the the MsBuild log file.
         /// The log file needs to be in the format as defined by the <paramref name="format"/> parameter.</param>
         /// <param name="format">Format of the provided MsBuild log file.</param>
-        protected MsBuildCodeAnalysisSettings(FilePath logFilePath, ILogFileFormat format)
+        protected MsBuildIssuesSettings(FilePath logFilePath, ILogFileFormat format)
         {
             logFilePath.NotNull(nameof(logFilePath));
             format.NotNull(nameof(format));
@@ -31,12 +31,12 @@
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MsBuildCodeAnalysisSettings"/> class.
+        /// Initializes a new instance of the <see cref="MsBuildIssuesSettings"/> class.
         /// </summary>
         /// <param name="logFileContent">Content of the the MsBuild log file.
         /// The log file needs to be in the format as defined by the <paramref name="format"/> parameter.</param>
         /// <param name="format">Format of the provided MsBuild log file.</param>
-        protected MsBuildCodeAnalysisSettings(string logFileContent, ILogFileFormat format)
+        protected MsBuildIssuesSettings(string logFileContent, ILogFileFormat format)
         {
             logFileContent.NotNullOrWhiteSpace(nameof(logFileContent));
             format.NotNull(nameof(format));
@@ -56,28 +56,28 @@
         public string LogFileContent { get; private set; }
 
         /// <summary>
-        /// Returns a new instance of the <see cref="MsBuildCodeAnalysisSettings"/> class from a log file on disk.
+        /// Returns a new instance of the <see cref="MsBuildIssuesSettings"/> class from a log file on disk.
         /// </summary>
         /// <param name="logFilePath">Path to the MsBuild log file.
         /// The log file needs to be in the format as defined by the <paramref name="format"/> parameter.</param>
         /// <param name="format">Format of the provided MsBuild log file.</param>
-        /// <returns>Instance of the <see cref="MsBuildCodeAnalysisSettings"/> class.</returns>
-        public static MsBuildCodeAnalysisSettings FromFilePath(FilePath logFilePath, ILogFileFormat format)
+        /// <returns>Instance of the <see cref="MsBuildIssuesSettings"/> class.</returns>
+        public static MsBuildIssuesSettings FromFilePath(FilePath logFilePath, ILogFileFormat format)
         {
-            return new MsBuildCodeAnalysisSettings(logFilePath, format);
+            return new MsBuildIssuesSettings(logFilePath, format);
         }
 
         /// <summary>
-        /// Returns a new instance of the <see cref="MsBuildCodeAnalysisSettings"/> class from the content
+        /// Returns a new instance of the <see cref="MsBuildIssuesSettings"/> class from the content
         /// of a MsBuild log file.
         /// </summary>
         /// <param name="logFileContent">Content of the MsBuild log file.
         /// The log file needs to be in the format as defined by the <paramref name="format"/> parameter.</param>
         /// <param name="format">Format of the provided MsBuild log file.</param>
-        /// <returns>Instance of the <see cref="MsBuildCodeAnalysisSettings"/> class.</returns>
-        public static MsBuildCodeAnalysisSettings FromContent(string logFileContent, ILogFileFormat format)
+        /// <returns>Instance of the <see cref="MsBuildIssuesSettings"/> class.</returns>
+        public static MsBuildIssuesSettings FromContent(string logFileContent, ILogFileFormat format)
         {
-            return new MsBuildCodeAnalysisSettings(logFileContent, format);
+            return new MsBuildIssuesSettings(logFileContent, format);
         }
     }
 }

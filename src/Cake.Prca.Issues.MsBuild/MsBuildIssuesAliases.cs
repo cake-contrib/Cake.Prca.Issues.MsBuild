@@ -11,7 +11,7 @@
     /// </summary>
     [CakeAliasCategory(CakeAliasConstants.MainCakeAliasCategory)]
     [CakeNamespaceImport("Cake.Prca.Issues.MsBuild")]
-    public static class MsBuildCodeAnalysisProviderAliases
+    public static class MsBuildIssuesAliases
     {
         /// <summary>
         /// Registers a new URL resolver with default priority of 0.
@@ -142,7 +142,7 @@
         /// </example>
         [CakeMethodAlias]
         [CakeAliasCategory(CakeAliasConstants.CodeAnalysisProviderCakeAliasCategory)]
-        public static ICodeAnalysisProvider MsBuildCodeAnalysisFromFilePath(
+        public static ICodeAnalysisProvider MsBuildIssuesFromFilePath(
             this ICakeContext context,
             FilePath logFilePath,
             ILogFileFormat format)
@@ -151,7 +151,7 @@
             logFilePath.NotNull(nameof(logFilePath));
             format.NotNull(nameof(format));
 
-            return context.MsBuildCodeAnalysis(MsBuildCodeAnalysisSettings.FromFilePath(logFilePath, format));
+            return context.MsBuildIssues(MsBuildIssuesSettings.FromFilePath(logFilePath, format));
         }
 
         /// <summary>
@@ -181,7 +181,7 @@
         /// </example>
         [CakeMethodAlias]
         [CakeAliasCategory(CakeAliasConstants.CodeAnalysisProviderCakeAliasCategory)]
-        public static ICodeAnalysisProvider MsBuildCodeAnalysisFromContent(
+        public static ICodeAnalysisProvider MsBuildIssuesFromContent(
             this ICakeContext context,
             string logFileContent,
             ILogFileFormat format)
@@ -190,7 +190,7 @@
             logFileContent.NotNullOrWhiteSpace(nameof(logFileContent));
             format.NotNull(nameof(format));
 
-            return context.MsBuildCodeAnalysis(MsBuildCodeAnalysisSettings.FromContent(logFileContent, format));
+            return context.MsBuildIssues(MsBuildIssuesSettings.FromContent(logFileContent, format));
         }
 
         /// <summary>
@@ -221,14 +221,14 @@
         /// </example>
         [CakeMethodAlias]
         [CakeAliasCategory(CakeAliasConstants.CodeAnalysisProviderCakeAliasCategory)]
-        public static ICodeAnalysisProvider MsBuildCodeAnalysis(
+        public static ICodeAnalysisProvider MsBuildIssues(
             this ICakeContext context,
-            MsBuildCodeAnalysisSettings settings)
+            MsBuildIssuesSettings settings)
         {
             context.NotNull(nameof(context));
             settings.NotNull(nameof(settings));
 
-            return new MsBuildCodeAnalysisProvider(context.Log, settings);
+            return new MsBuildIssuesProvider(context.Log, settings);
         }
     }
 }

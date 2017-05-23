@@ -3,7 +3,7 @@
     using Testing;
     using Xunit;
 
-    public class MsBuildCodeAnalysisProviderTests
+    public class MsBuildIssuesProviderTests
     {
         public sealed class TheMsBuildCodeAnalysisProviderCtor
         {
@@ -12,9 +12,9 @@
             {
                 // Given / When
                 var result = Record.Exception(() =>
-                    new MsBuildCodeAnalysisProvider(
+                    new MsBuildIssuesProvider(
                         null,
-                        MsBuildCodeAnalysisSettings.FromContent(
+                        MsBuildIssuesSettings.FromContent(
                             "Foo",
                             new XmlFileLoggerFormat(new FakeLog()))));
 
@@ -26,7 +26,7 @@
             public void Should_Throw_If_Settings_Are_Null()
             {
                 var result = Record.Exception(() =>
-                    new MsBuildCodeAnalysisProvider(
+                    new MsBuildIssuesProvider(
                         new FakeLog(),
                         null));
 
