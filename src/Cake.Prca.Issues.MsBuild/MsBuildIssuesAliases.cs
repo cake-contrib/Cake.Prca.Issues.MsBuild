@@ -10,7 +10,6 @@
     /// pull requests.
     /// </summary>
     [CakeAliasCategory(CakeAliasConstants.MainCakeAliasCategory)]
-    [CakeNamespaceImport("Cake.Prca.Issues.MsBuild")]
     public static class MsBuildIssuesAliases
     {
         /// <summary>
