@@ -7,9 +7,9 @@
     using Core.Diagnostics;
 
     /// <summary>
-    /// MsBuild log format as written by the <code>XmlFileLogger</code> class from MSBuild Extension Pack.
+    /// MsBuild log format as written by the <c>XmlFileLogger</c> class from MSBuild Extension Pack.
     /// </summary>
-    public class XmlFileLoggerFormat : LogFileFormat
+    internal class XmlFileLoggerFormat : LogFileFormat
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlFileLoggerFormat"/> class.
@@ -23,7 +23,7 @@
         /// <inheritdoc/>
         public override IEnumerable<ICodeAnalysisIssue> ReadIssues(
             ReportCodeAnalysisIssuesToPullRequestSettings prcaSettings,
-            MsBuildCodeAnalysisSettings settings)
+            MsBuildIssuesSettings settings)
         {
             prcaSettings.NotNull(nameof(prcaSettings));
             settings.NotNull(nameof(settings));
@@ -56,7 +56,7 @@
                     continue;
                 }
 
-                result.Add(new CodeAnalysisIssue<MsBuildCodeAnalysisProvider>(
+                result.Add(new CodeAnalysisIssue<MsBuildIssuesProvider>(
                     fileName,
                     line,
                     warning.Value,

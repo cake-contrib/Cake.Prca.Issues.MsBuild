@@ -26,7 +26,7 @@
             public void Should_Read_Issue_With_File_Correct()
             {
                 // Given
-                var fixture = new MsBuildCodeAnalysisProviderFixture("IssueWithFile.xml");
+                var fixture = new MsBuildIssuesProviderFixture("IssueWithFile.xml");
 
                 // When
                 var issues = fixture.ReadIssues().ToList();
@@ -47,7 +47,7 @@
             public void Should_Read_Issue_With_File_Without_Path_Correct()
             {
                 // Given
-                var fixture = new MsBuildCodeAnalysisProviderFixture("IssueWithOnlyFileName.xml");
+                var fixture = new MsBuildIssuesProviderFixture("IssueWithOnlyFileName.xml");
 
                 // When
                 var issues = fixture.ReadIssues().ToList();
@@ -68,7 +68,7 @@
             public void Should_Read_Issue_Without_File_Correct()
             {
                 // Given
-                var fixture = new MsBuildCodeAnalysisProviderFixture("IssueWithoutFile.xml");
+                var fixture = new MsBuildIssuesProviderFixture("IssueWithoutFile.xml");
 
                 // When
                 var issues = fixture.ReadIssues().ToList();

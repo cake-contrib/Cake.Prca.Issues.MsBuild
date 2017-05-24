@@ -10,8 +10,7 @@
     /// pull requests.
     /// </summary>
     [CakeAliasCategory(CakeAliasConstants.MainCakeAliasCategory)]
-    [CakeNamespaceImport("Cake.Prca.Issues.MsBuild")]
-    public static class MsBuildCodeAnalysisProviderAliases
+    public static class MsBuildIssuesAliases
     {
         /// <summary>
         /// Registers a new URL resolver with default priority of 0.
@@ -79,7 +78,7 @@
 
         /// <summary>
         /// <para>
-        /// Gets an instance for the MsBuild log format as written by the <code>XmlFileLogger</code> class
+        /// Gets an instance for the MsBuild log format as written by the <c>XmlFileLogger</c> class
         /// from MSBuild Extension Pack.
         /// </para>
         /// <para>
@@ -129,7 +128,7 @@
         /// <![CDATA[
         ///     var repoRoot = new DirectoryPath("c:\repo");
         ///     ReportCodeAnalysisIssuesToPullRequest(
-        ///         MsBuildCodeAnalysisFromFilePath(
+        ///         MsBuildIssuesFromFilePath(
         ///             "C:\build\msbuild.log",
         ///             MsBuildXmlFileLoggerFormat),
         ///         TfsPullRequests(
@@ -142,7 +141,7 @@
         /// </example>
         [CakeMethodAlias]
         [CakeAliasCategory(CakeAliasConstants.CodeAnalysisProviderCakeAliasCategory)]
-        public static ICodeAnalysisProvider MsBuildCodeAnalysisFromFilePath(
+        public static ICodeAnalysisProvider MsBuildIssuesFromFilePath(
             this ICakeContext context,
             FilePath logFilePath,
             ILogFileFormat format)
@@ -151,7 +150,7 @@
             logFilePath.NotNull(nameof(logFilePath));
             format.NotNull(nameof(format));
 
-            return context.MsBuildCodeAnalysis(MsBuildCodeAnalysisSettings.FromFilePath(logFilePath, format));
+            return context.MsBuildIssues(MsBuildIssuesSettings.FromFilePath(logFilePath, format));
         }
 
         /// <summary>
@@ -168,7 +167,7 @@
         /// <![CDATA[
         ///     var repoRoot = new DirectoryPath("c:\repo");
         ///     ReportCodeAnalysisIssuesToPullRequest(
-        ///         MsBuildCodeAnalysisFromContent(
+        ///         MsBuildIssuesFromContent(
         ///             logFileContent,
         ///             MsBuildXmlFileLoggerFormat),
         ///         TfsPullRequests(
@@ -181,7 +180,7 @@
         /// </example>
         [CakeMethodAlias]
         [CakeAliasCategory(CakeAliasConstants.CodeAnalysisProviderCakeAliasCategory)]
-        public static ICodeAnalysisProvider MsBuildCodeAnalysisFromContent(
+        public static ICodeAnalysisProvider MsBuildIssuesFromContent(
             this ICakeContext context,
             string logFileContent,
             ILogFileFormat format)
@@ -190,7 +189,7 @@
             logFileContent.NotNullOrWhiteSpace(nameof(logFileContent));
             format.NotNull(nameof(format));
 
-            return context.MsBuildCodeAnalysis(MsBuildCodeAnalysisSettings.FromContent(logFileContent, format));
+            return context.MsBuildIssues(MsBuildIssuesSettings.FromContent(logFileContent, format));
         }
 
         /// <summary>
@@ -205,12 +204,12 @@
         /// <![CDATA[
         ///     var repoRoot = new DirectoryPath("c:\repo");
         ///     var settings =
-        ///         MsBuildCodeAnalysisSettings.FromFilePath(
+        ///         MsBuildIssuesSettings.FromFilePath(
         ///             "C:\build\msbuild.log",
         ///             MsBuildXmlFileLoggerFormat);
         ///
         ///     ReportCodeAnalysisIssuesToPullRequest(
-        ///         MsBuildCodeAnalysis(settings),
+        ///         MsBuildIssues(settings),
         ///         TfsPullRequests(
         ///             new Uri("http://myserver:8080/tfs/defaultcollection/myproject/_git/myrepository"),
         ///             "refs/heads/feature/myfeature",
@@ -221,14 +220,14 @@
         /// </example>
         [CakeMethodAlias]
         [CakeAliasCategory(CakeAliasConstants.CodeAnalysisProviderCakeAliasCategory)]
-        public static ICodeAnalysisProvider MsBuildCodeAnalysis(
+        public static ICodeAnalysisProvider MsBuildIssues(
             this ICakeContext context,
-            MsBuildCodeAnalysisSettings settings)
+            MsBuildIssuesSettings settings)
         {
             context.NotNull(nameof(context));
             settings.NotNull(nameof(settings));
 
-            return new MsBuildCodeAnalysisProvider(context.Log, settings);
+            return new MsBuildIssuesProvider(context.Log, settings);
         }
     }
 }

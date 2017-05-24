@@ -15,6 +15,6 @@
         /// <returns>List of code analysis issues</returns>
         IEnumerable<ICodeAnalysisIssue> ReadIssues(
             ReportCodeAnalysisIssuesToPullRequestSettings prcaSettings,
-            MsBuildCodeAnalysisSettings settings);
+            MsBuildIssuesSettings settings);
     }
 }
