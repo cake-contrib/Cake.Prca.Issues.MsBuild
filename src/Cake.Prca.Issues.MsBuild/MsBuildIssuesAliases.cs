@@ -127,7 +127,7 @@
         /// <code>
         /// <![CDATA[
         ///     var repoRoot = new DirectoryPath("c:\repo");
-        ///     ReportCodeAnalysisIssuesToPullRequest(
+        ///     ReportIssuesToPullRequest(
         ///         MsBuildIssuesFromFilePath(
         ///             "C:\build\msbuild.log",
         ///             MsBuildXmlFileLoggerFormat),
@@ -166,7 +166,7 @@
         /// <code>
         /// <![CDATA[
         ///     var repoRoot = new DirectoryPath("c:\repo");
-        ///     ReportCodeAnalysisIssuesToPullRequest(
+        ///     ReportIssuesToPullRequest(
         ///         MsBuildIssuesFromContent(
         ///             logFileContent,
         ///             MsBuildXmlFileLoggerFormat),
@@ -208,7 +208,7 @@
         ///             "C:\build\msbuild.log",
         ///             MsBuildXmlFileLoggerFormat);
         ///
-        ///     ReportCodeAnalysisIssuesToPullRequest(
+        ///     ReportIssuesToPullRequest(
         ///         MsBuildIssues(settings),
         ///         TfsPullRequests(
         ///             new Uri("http://myserver:8080/tfs/defaultcollection/myproject/_git/myrepository"),
