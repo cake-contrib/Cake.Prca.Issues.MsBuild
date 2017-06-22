@@ -23,14 +23,14 @@
             }
 
             this.PrcaSettings =
-                new ReportCodeAnalysisIssuesToPullRequestSettings(@"c:\Source\Cake.Prca");
+                new ReportIssuesToPullRequestSettings(@"c:\Source\Cake.Prca");
         }
 
         public FakeLog Log { get; set; }
 
         public MsBuildIssuesSettings Settings { get; set; }
 
-        public ReportCodeAnalysisIssuesToPullRequestSettings PrcaSettings { get; set; }
+        public ReportIssuesToPullRequestSettings PrcaSettings { get; set; }
 
         public MsBuildIssuesProvider Create()
         {
