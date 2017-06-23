@@ -22,7 +22,7 @@
 
         /// <inheritdoc/>
         public override IEnumerable<ICodeAnalysisIssue> ReadIssues(
-            ReportIssuesToPullRequestSettings prcaSettings,
+            PrcaSettings prcaSettings,
             MsBuildIssuesSettings settings)
         {
             prcaSettings.NotNull(nameof(prcaSettings));
@@ -126,7 +126,7 @@
         /// <returns>True if the file path could be parsed.</returns>
         private bool TryGetFile(
             XElement warning,
-            ReportIssuesToPullRequestSettings prcaSettings,
+            PrcaSettings prcaSettings,
             out string fileName)
         {
             fileName = string.Empty;

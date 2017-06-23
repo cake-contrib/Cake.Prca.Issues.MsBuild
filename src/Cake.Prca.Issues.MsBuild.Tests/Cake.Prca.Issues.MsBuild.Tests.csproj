@@ -40,7 +40,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Cake.Prca, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cake.Prca.0.5.0-beta0001\lib\net45\Cake.Prca.dll</HintPath>
+      <HintPath>..\packages\Cake.Prca.0.5.0\lib\net45\Cake.Prca.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Cake.Testing, Version=0.16.2.0, Culture=neutral, processorArchitecture=MSIL">
