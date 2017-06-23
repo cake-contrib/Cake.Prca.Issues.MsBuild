@@ -14,7 +14,7 @@
         /// <param name="settings">Settings for code analysis provider to use.</param>
         /// <returns>List of code analysis issues</returns>
         IEnumerable<ICodeAnalysisIssue> ReadIssues(
-            ReportIssuesToPullRequestSettings prcaSettings,
+            PrcaSettings prcaSettings,
             MsBuildIssuesSettings settings);
     }
 }
