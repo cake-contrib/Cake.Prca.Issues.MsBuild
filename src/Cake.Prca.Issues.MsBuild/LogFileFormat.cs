@@ -26,7 +26,7 @@
 
         /// <inheritdoc/>
         public abstract IEnumerable<ICodeAnalysisIssue> ReadIssues(
-            ReportCodeAnalysisIssuesToPullRequestSettings prcaSettings,
+            PrcaSettings prcaSettings,
             MsBuildIssuesSettings settings);
     }
 }
